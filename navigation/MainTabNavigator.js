@@ -39,6 +39,7 @@ HomeStack.path = '';
 const SearchStack = createStackNavigator(
   {
     Search: SearchScreen,
+    Home: HomeScreen // Dummy placeholder, we will replace this.
   },
   config
 );

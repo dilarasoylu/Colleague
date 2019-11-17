@@ -18,9 +18,10 @@ export function ClassResourceThumbnail(props) {
 }
 
 export function PeopleThumbnail(props) {
+  // For passing parameters to screens read: https://reactnavigation.org/docs/en/params.html
   return (
     <TouchableOpacity
-      onPress={() => {}}
+      onPress={() => {props.navigation.navigate('Home')}}
       style={styles.thumbnailContainer}>
     </TouchableOpacity>
   );

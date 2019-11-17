@@ -79,7 +79,7 @@ export default class SearchScreen extends Component {
       filtersSection = null
     }
 
-    searchResults = getSearchResults(this.state.filterState)
+    searchResults = getSearchResults(this.state.filterState, this.props.navigation)
 
     return (
       <View style={styles.mainContainer}>
@@ -112,8 +112,8 @@ export default class SearchScreen extends Component {
            * Go ahead and delete ExpoLinksView and replace it with your content;
            * we just wanted to provide you with some helpful links.
            */}
-           <Text style={styles.searchResultsHeaderText}>Search Results</Text>
-           {searchResults}
+          <Text style={styles.searchResultsHeaderText}>Search Results</Text>
+          {searchResults}
         </ScrollView>
       </View>
     );
@@ -127,11 +127,12 @@ resources = {
   Talk: talks,
   People: people
 }
-function getSearchResults(filterState) {
+function getSearchResults(filterState, navigation) {
   return (
     <View>
       <Text>{JSON.stringify(filterState)}</Text>
-      <PeopleThumbnail/>
+      <PeopleThumbnail
+        navigation={navigation}/>
       <PeopleThumbnail/>
       <PeopleThumbnail/>
       <PeopleThumbnail/>
