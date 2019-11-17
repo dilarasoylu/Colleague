@@ -9,6 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import SaveScreen from '../screens/SaveScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import PersonScreen from '../screens/PersonScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -39,7 +40,7 @@ HomeStack.path = '';
 const SearchStack = createStackNavigator(
   {
     Search: SearchScreen,
-    Home: HomeScreen // Dummy placeholder, we will replace this.
+    People: PersonScreen
   },
   config
 );

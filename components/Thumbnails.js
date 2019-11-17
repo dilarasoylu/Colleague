@@ -21,7 +21,7 @@ export function PeopleThumbnail(props) {
   // For passing parameters to screens read: https://reactnavigation.org/docs/en/params.html
   return (
     <TouchableOpacity
-      onPress={() => {props.navigation.navigate('Home')}}
+      onPress={() => {props.navigation.navigate('People')}}
       style={styles.thumbnailContainer}>
     </TouchableOpacity>
   );
