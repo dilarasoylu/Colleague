@@ -10,14 +10,14 @@ import Images from '../constants/Images';
 
 import logged_user_uuid  from '../data/login_information.js'
 
-import {people} from '../data/mockPeople.json'
+import people from '../data/mockPeople'
 
 export default function ProfileScreen (props){
 
     return (
 
       <View>
-
+        <Text>{JSON.stringify(people[0].uuid)}</Text>
         <PersonScreen name={props.name} position={props.position} institution={props.institution} uuid={props.uuid}/>
       </View>
       

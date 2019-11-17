@@ -23,16 +23,26 @@ export default class PersonScreen extends Component {
 	updateIndex (selectedIndex) {
 	  this.setState({selectedIndex})
 	};
- 
+
+  // getResults = (tab, uuid) => {
+  //   <PeopleThumbnail/>
+  //   <PeopleThumbnail/>
+  // }
+
+  
   render() {
+
   	const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
   	const { selectedIndex } = this.state
-    if (this.props.uuid == logged_user_uuid){
+    if (this.props.uuid == {logged_user_uuid}){
       displayIcon ='ios-settings'
     }
     else{
       displayIcon = 'ios-mail'
     }
+
+    results = <PeopleThumbnail/>//getResults(tab, logged_user_uuid)
+ 
 
     return (
       <View style={styles.container}>
@@ -48,7 +58,6 @@ export default class PersonScreen extends Component {
 		              	<Text style={styles.position}>{this.props.position}</Text>
 		              	<Text style={styles.institution}>{this.props.institution}</Text>
                     <Text style={styles.institution}>{this.props.institution}</Text>
-                    <Text> logged_user_uuid</Text>
 
 		            </View>
 		        </View>
@@ -68,12 +77,7 @@ export default class PersonScreen extends Component {
           textStyle={{fontSize: 12, fontWeight: '700'}}
   		  />
 		  <ScrollView style={styles.scrollViewContainer}>
-      	<PeopleThumbnail/>
-        <PeopleThumbnail/>
-        <PeopleThumbnail/>
-        <PeopleThumbnail/>
-        <PeopleThumbnail/>
-        <PeopleThumbnail/>
+      	{results}
       </ScrollView>
       </View>
     );
@@ -85,8 +89,8 @@ const styles = StyleSheet.create({
   	flex: 1
   },
   pictureView: {
-  	marginLeft: 10,
-  	marginRight: 10,
+  	marginLeft: 20,
+  	marginRight: 20,
   	flexDirection: 'row',
   	justifyContent: 'space-around',
   	alignItems: 'center'

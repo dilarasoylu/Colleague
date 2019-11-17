@@ -1,5 +1,5 @@
 const images = {
-  // person1: require('../Images/1.jpeg'),
+  red: require('../Images/red.jpeg'),
 }
 
 export default images
