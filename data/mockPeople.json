@@ -9,6 +9,6 @@ people = [
     institution: 'Stanford University',
     academic_title: 'Professor',
     department: 'Computer Science',
-    profile_image_uri: ''
+    profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
   }
 ]
