@@ -1,7 +1,7 @@
 class_resources = [
   {
-    resource_type: 'class_resource',
-    accessibility_type: ['vision'],
+    resource_type: 'Classroom',
+    accessibility_type: ['Vision'],
     subjects: ['CS'],
     creator_uuid: '0001'
   }

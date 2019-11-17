@@ -1,7 +1,7 @@
 people = [
   {
-    resource_type: 'person',
-    accessibility_type: ['vision', 'hearing'],
+    resource_type: 'People',
+    accessibility_type: ['Vision', 'Hearing'],
     subjects: ['CS'],
     uuid: '0001',
     name: 'John Doe',

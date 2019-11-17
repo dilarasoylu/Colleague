@@ -1,7 +1,7 @@
 talks = [
   {
-    resource_type: 'talk',
-    accessibility_type: ['attention'],
+    resource_type: 'Talk',
+    accessibility_type: ['Attention'],
     subjects: ['CS'],
     creator_uuid: '0001'
   }

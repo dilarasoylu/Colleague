@@ -3,7 +3,9 @@ const mainThemeColor = '#10A7B1';
 export default {
   mainThemeColor,
   backgroundColor: '#fff',
+  whiteComponentColor: '#F8F8FA',
   lightGray: 'rgba(0,0,0,0.4)',
+  shadowColor: '#ddd',
   tabIconDefault: '#ccc',
   tabIconSelected: mainThemeColor,
   tabBar: '#fefefe',

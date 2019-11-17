@@ -4,12 +4,21 @@ import { SearchBar } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
+import articles from '../data/mockArticles';
+import classResources from '../data/mockClassResources';
+import people from '../data/mockPeople';
+import talks from '../data/mockTalks';
 
 export default class SearchScreen extends Component {
   state = {
     searchQuery: '',
     isLoading: false,
-    showFilters: true
+    showFilters: true,
+    filterState: {
+      Accessibility: {Vision: false, Hearing: false, Attention: false},
+      Resource: {Classroom: false, Article: false, Talk: false, People: false},
+      Subject: {CS: false, ME: false, AA: false}
+    }
   };
 
   updateSearch = searchQuery => {
@@ -25,82 +34,101 @@ export default class SearchScreen extends Component {
      });
   };
 
+  getFilterView = () => {
+    return (
+      <View>
+        {this.getFilterRow('Accessibility', ['Vision', 'Hearing', 'Attention'])}
+        {this.getFilterRow('Resource', ['Classroom', 'Article', 'Talk', 'People'])}
+        {this.getFilterRow('Subject', ['CS', 'ME', 'AA'])}
+      </View>
+    )
+  };
+
+  getFilterRow = (filter_type, filter_options) => {
+    return (
+      <View style={styles.filterContainer}>
+        <Text style={styles.filterTextStyle}>{filter_type}:</Text>
+        {
+          filter_options.map((option) => {
+            return (
+              <Button
+                title={option}
+                color={this.state.filterState[filter_type][option] ? Colors.mainThemeColor : Colors.lightGray}
+                onPress={() => {
+                  newFilterState = this.state.filterState
+                  newFilterState[filter_type][option] = !newFilterState[filter_type][option]
+                  this.setState({
+                    filterState: newFilterState
+                   });
+                }}
+              />
+            );
+          })
+        }
+      </View>
+    )
+  };
+
   render() {
     let filtersSection;
 
     if (this.state.showFilters) {
-      filtersSection = getFilterView(this.state)
+      filtersSection = this.getFilterView()
     } else {
       filtersSection = null
     }
 
+    searchResults = getSearchResults(this.state.filterState)
+
     return (
       <View style={styles.mainContainer}>
         <View style={styles.searchContainer}>
-          <SearchBar
-            platform="ios"
-            placeholder="Type Here..."
-            showLoading={this.state.isLoading}
-            onChangeText={this.updateSearch}
-            value={this.state.searchQuery}
-            containerStyle={styles.searchOuterContainer}
-            cancelButtonProps={styles.searchCancelButtonProps}
-          />
-          <TouchableOpacity onPress={this.updateFilterVisibility}>
-            <Ionicons
-              name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-              size={27}
-              style={{ marginTop: 17 }}
-              color={this.state.showFilters ? Colors.tabIconDefault : Colors.tabIconSelected}
-            />
-          </TouchableOpacity>
+          <View style={styles.innerSearchContainer}>
+            <View style={styles.searchBarContainer}>
+              <SearchBar
+                platform="ios"
+                placeholder="Type Here..."
+                showLoading={this.state.isLoading}
+                onChangeText={this.updateSearch}
+                value={this.state.searchQuery}
+                containerStyle={styles.searchBarOuterContainer}
+                cancelButtonProps={styles.searchCancelButtonProps}
+              />
+              <TouchableOpacity onPress={this.updateFilterVisibility}>
+                <Ionicons
+                  name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+                  size={27}
+                  style={{ marginTop: 17 }}
+                  color={this.state.showFilters ? Colors.tabIconDefault : Colors.tabIconSelected}
+                />
+              </TouchableOpacity>
+            </View>
+            {filtersSection}
+          </View>
         </View>
-        {filtersSection}
         <ScrollView style={styles.scrollViewContainer}>
           {/**
            * Go ahead and delete ExpoLinksView and replace it with your content;
            * we just wanted to provide you with some helpful links.
            */}
-           <Text style={styles.recentSearchesHeaderText}>Recent Searches</Text>
-           <Text style={styles.recentSearchesItemText}>cs professor</Text>
-           <Text style={styles.recentSearchesItemText}>maths</Text>
-           <Text style={styles.recentSearchesItemText}>pointers</Text>
+           <Text style={styles.searchResultsHeaderText}>Search Results</Text>
+           {searchResults}
         </ScrollView>
       </View>
     );
   }
 }
 
-function getFilterView(state) {
-  return (
-    <View>
-      {getFilterRow(state, 'Accessibility', ['Vision', 'Hearing', 'Attention'])}
-      {getFilterRow(state, 'Resource', ['Classroom', 'Article', 'Talk', 'People'])}
-      {getFilterRow(state, 'Subject', ['CS', 'ME', 'AA'])}
-    </View>
-  )
-}
 
-function getFilterRow(state, filter_type, filter_options) {
+resources = {
+  Classroom: classResources,
+  Article: articles,
+  Talk: talks,
+  People: people
+}
+function getSearchResults(filterState) {
   return (
-    <View style={styles.filterContainer}>
-      <Text style={styles.filterTextStyle}>{filter_type}:</Text>
-      <Button
-        title={filter_options[0]}
-        color={Colors.mainThemeColor}
-        onPress={() => Alert.alert('Vision pressed')}
-      />
-      <Button
-        title={filter_options[1]}
-        color={Colors.mainThemeColor}
-        onPress={() => Alert.alert('Vision pressed')}
-      />
-      <Button
-        title={filter_options[2]}
-        color={Colors.mainThemeColor}
-        onPress={() => Alert.alert('Vision pressed')}
-      />
-    </View>
+    <Text>{JSON.stringify(filterState)}</Text>
   )
 }
 
@@ -118,10 +146,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchContainer: {
+    backgroundColor: Colors.backgroundColor,
+    shadowOffset: {height: 0, width: 0},
+    shadowColor: Colors.shadowColor,
+    shadowOpacity: 1,
+    shadowRadius: 3
+  },
+  innerSearchContainer: {
+  },
+  searchBarContainer: {
     flexDirection: 'row',
     paddingHorizontal: 10
   },
-  searchOuterContainer: {
+  searchBarOuterContainer: {
     flex: 0.98,
     backgroundColor: Colors.backgroundColor
   },
@@ -134,15 +171,15 @@ const styles = StyleSheet.create({
   },
   filterTextStyle: {
     fontSize: 18,
-    color: Colors.lightGray,
+    color: Colors.mainThemeColor,
     paddingTop: 8
   },
   scrollViewContainer: {
     paddingHorizontal: 20
   },
-  recentSearchesHeaderText: {
-    fontSize: 17,
-    paddingTop: 5,
+  searchResultsHeaderText: {
+    fontSize: 20,
+    paddingTop: 10,
     color: Colors.lightGray
   },
   recentSearchesItemText: {

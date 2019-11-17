@@ -1,7 +1,7 @@
 articles = [
   {
-    resource_type: 'article',
-    accessibility_type: ['hearing'],
+    resource_type: 'Article',
+    accessibility_type: ['Hearing'],
     subjects: ['CS'],
     creator_uuid: '0001'
   }
