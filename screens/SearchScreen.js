@@ -8,6 +8,7 @@ import articles from '../data/mockArticles';
 import classResources from '../data/mockClassResources';
 import people from '../data/mockPeople';
 import talks from '../data/mockTalks';
+import { PeopleThumbnail } from '../components/Thumbnails';
 
 export default class SearchScreen extends Component {
   state = {
@@ -128,7 +129,15 @@ resources = {
 }
 function getSearchResults(filterState) {
   return (
-    <Text>{JSON.stringify(filterState)}</Text>
+    <View>
+      <Text>{JSON.stringify(filterState)}</Text>
+      <PeopleThumbnail/>
+      <PeopleThumbnail/>
+      <PeopleThumbnail/>
+      <PeopleThumbnail/>
+      <PeopleThumbnail/>
+      <PeopleThumbnail/>
+    </View>
   )
 }
 
