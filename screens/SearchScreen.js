@@ -4,11 +4,11 @@ import { SearchBar } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
-import articles from '../data/mockArticles';
-import classResources from '../data/mockClassResources';
-import people from '../data/mockPeople';
-import talks from '../data/mockTalks';
-import { PeopleThumbnail } from '../components/Thumbnails';
+import mockArticles from '../data/mockArticles';
+import mockClassResources from '../data/mockClassResources';
+import mockPeople from '../data/mockPeople';
+import mockTalks from '../data/mockTalks';
+import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnail } from '../components/Thumbnails';
 
 export default class SearchScreen extends Component {
   state = {
@@ -121,25 +121,75 @@ export default class SearchScreen extends Component {
 }
 
 
-resources = {
-  Classroom: classResources,
-  Article: articles,
-  Talk: talks,
-  People: people
+thumbnailMatching = {
+  Classroom: ClassResourceThumbnail,
+  Article: ArticleThumbnail,
+  Talk: TalkThumbnail,
+  People: PeopleThumbnail
 }
 function getSearchResults(filterState, navigation) {
+  allMockData = mockArticles.concat(mockClassResources, mockPeople, mockTalks)
+  allMockData = shuffle(allMockData)
+
+  resourceFilterOn = anyTrue(filterState['Resource'])
+  accessibilityFilterOn = anyTrue(filterState['Accessibility'])
+  subjectFilterOn = anyTrue(filterState['Subject'])
+
+  allMockData = allMockData.filter(mockItem => {
+    if (resourceFilterOn &&
+        !filterState['Resource'][mockItem['resource_type']]) {
+      console.log('resource filter failed')
+      return false
+    }
+    if (accessibilityFilterOn) {
+      filteredList = mockItem['accessibility_type'].filter(item => {
+        return filterState['Accessibility'][item]
+      })
+      if (filteredList.length == 0) { return false }
+    }
+    if (subjectFilterOn) {
+      filteredList = mockItem['subjects'].filter(item => {
+        return filterState['Subject'][item]
+      })
+      if (filteredList.length == 0) { return false }
+    }
+    return true
+  })
+
   return (
     <View>
-      <Text>{JSON.stringify(filterState)}</Text>
-      <PeopleThumbnail
-        navigation={navigation}/>
-      <PeopleThumbnail/>
-      <PeopleThumbnail/>
-      <PeopleThumbnail/>
-      <PeopleThumbnail/>
-      <PeopleThumbnail/>
+      {
+        allMockData.map((mockItem) => {
+          ThumbnailClass = thumbnailMatching[mockItem['resource_type']]
+          return (
+            <ThumbnailClass
+              navigation={navigation}
+              fields={mockItem}/>
+          );
+        })
+      }
     </View>
   )
+}
+
+function anyTrue(dictionary) {
+  for (key in dictionary) {
+    if (dictionary[key]) {
+      return true
+    }
+  }
+  return false
+}
+
+function shuffle(array) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
 }
 
 SearchScreen.navigationOptions = {

@@ -1,19 +1,23 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 
 import Colors from '../constants/Colors';
 
 export function ArticleThumbnail(props) {
   return (
-    <View>
-    </View>
+    <TouchableOpacity
+      style={styles.thumbnailContainer}>
+      <Text>{JSON.stringify(props.fields)}</Text>
+    </TouchableOpacity>
   );
 }
 
 export function ClassResourceThumbnail(props) {
   return (
-    <View>
-    </View>
+    <TouchableOpacity
+      style={styles.thumbnailContainer}>
+      <Text>{JSON.stringify(props.fields)}</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -23,14 +27,17 @@ export function PeopleThumbnail(props) {
     <TouchableOpacity
       onPress={() => {props.navigation.navigate('People')}}
       style={styles.thumbnailContainer}>
+      <Text>{JSON.stringify(props.fields)}</Text>
     </TouchableOpacity>
   );
 }
 
 export function TalkThumbnail(props) {
   return (
-    <View>
-    </View>
+    <TouchableOpacity
+      style={styles.thumbnailContainer}>
+      <Text>{JSON.stringify(props.fields)}</Text>
+    </TouchableOpacity>
   );
 }
 
