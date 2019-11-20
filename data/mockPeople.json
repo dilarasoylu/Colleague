@@ -1,4 +1,4 @@
-people = [
+mockPeople = [
   {
     resource_type: 'People',
     accessibility_type: ['Vision', 'Hearing'],
@@ -10,5 +10,17 @@ people = [
     academic_title: 'Professor',
     department: 'Computer Science',
     profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
+  },
+  {
+    resource_type: 'People',
+    accessibility_type: ['Hearing'],
+    subjects: ['ME'],
+    uuid: '0002',
+    name: 'Jessica Jane',
+    email: 'jessica@ucla.edu',
+    institution: 'University of California Los Angeles',
+    academic_title: 'Professor',
+    department: 'Mechanical Engineering',
+    profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
   }
 ]

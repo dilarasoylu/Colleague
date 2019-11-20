@@ -1,4 +1,4 @@
-class_resources = [
+mockClassResources = [
   {
     resource_type: 'Classroom',
     accessibility_type: ['Vision'],

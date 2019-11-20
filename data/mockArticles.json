@@ -1,4 +1,4 @@
-articles = [
+mockArticles = [
   {
     resource_type: 'Article',
     accessibility_type: ['Hearing'],
