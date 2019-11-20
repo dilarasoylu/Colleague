@@ -1,14 +1,8 @@
-mockTalks = [
+talks = [
   {
     resource_type: 'Talk',
     accessibility_type: ['Attention'],
     subjects: ['CS'],
     creator_uuid: '0001'
-  },
-  {
-    resource_type: 'Talk',
-    accessibility_type: ['Vision'],
-    subjects: ['ME'],
-    creator_uuid: '0002'
   }
 ]
