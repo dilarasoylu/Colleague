@@ -7,8 +7,11 @@ import { PeopleThumbnail } from '../components/Thumbnails';
 import Colors from '../constants/Colors';
 
 import Images from '../constants/Images';
-import logged_user_uuid  from '../data/login_information.js'
+import {logged_user_uuid} from '../data/login_information';
 
+import talks from '../data/mockTalks';
+import class_resources from '../data/mockClassResources';
+import articles from '../data/mockArticles';
 
 
 export default class PersonScreen extends Component {
@@ -24,24 +27,58 @@ export default class PersonScreen extends Component {
 	  this.setState({selectedIndex})
 	};
 
-  // getResults = (tab, uuid) => {
-  //   <PeopleThumbnail/>
-  //   <PeopleThumbnail/>
-  // }
+
+  getResourcesbyUUID = (array, uuid) => {
+    add = []
+    for (let i in array){
+      if (array[i].creator_uuid == '0001'){
+        add.push(array[i])
+      }
+    }
+    return add
+  };
+
+  getResults = (tab, uuid) => {
+    if (tab == 0){
+      add = this.getResourcesbyUUID(class_resources, this.props.uuid)
+      add = add.concat(this.getResourcesbyUUID(talks, this.props.uuid))
+      add = add.concat(this.getResourcesbyUUID(articles, this.props.uuid))
+    } else if (tab == 1){
+      add = this.getResourcesbyUUID(class_resources, this.props.uuid)
+    } else if (tab == 2){
+      add = this.getResourcesbyUUID(articles, this.props.uuid)
+    } else if (tab == 3){
+      add = this.getResourcesbyUUID(talks, this.props.uuid)
+    }
+    return(
+    <View>
+    <Text>{JSON.stringify(add)}</Text>
+    <Text>{tab}</Text>
+    <PeopleThumbnail/>
+    <PeopleThumbnail/>
+    </View>
+    )
+  };
+
 
   
   render() {
-
   	const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
   	const { selectedIndex } = this.state
-    if (this.props.uuid == {logged_user_uuid}){
+    const dict = {
+      0: 'all',
+      1: 'classroom',
+      2: 'articles',
+      3: 'talks',
+    }
+    if (this.props.uuid == '0001'){
       displayIcon ='ios-settings'
     }
     else{
       displayIcon = 'ios-mail'
     }
 
-    results = <PeopleThumbnail/>//getResults(tab, logged_user_uuid)
+    results = this.getResults(this.state.selectedIndex, logged_user_uuid)
  
 
     return (
@@ -55,9 +92,8 @@ export default class PersonScreen extends Component {
     			<View style={styles.rowItem}>
 	          	    <View style={styles.personDetails}>
 		          	    <Text style={styles.name}>{this.props.name}</Text>
-		              	<Text style={styles.position}>{this.props.position}</Text>
+		              	<Text style={styles.title}>{this.props.academic_title} of {this.props.department}</Text>
 		              	<Text style={styles.institution}>{this.props.institution}</Text>
-                    <Text style={styles.institution}>{this.props.institution}</Text>
 
 		            </View>
 		        </View>
@@ -77,12 +113,19 @@ export default class PersonScreen extends Component {
           textStyle={{fontSize: 12, fontWeight: '700'}}
   		  />
 		  <ScrollView style={styles.scrollViewContainer}>
+            <Text>{JSON.stringify(this.props.uuid)}</Text>
+            <Text>{logged_user_uuid}</Text>
+
+
+
       	{results}
       </ScrollView>
       </View>
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   containter: {
@@ -126,7 +169,7 @@ const styles = StyleSheet.create({
     color: Colors.mainThemeColor,
     fontWeight: '600',
   },
-  position:{
+  title:{
     fontSize:16,
   },
   institution:{

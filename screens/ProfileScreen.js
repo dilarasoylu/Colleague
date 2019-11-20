@@ -12,13 +12,13 @@ import logged_user_uuid  from '../data/login_information.js'
 
 import people from '../data/mockPeople'
 
+
 export default function ProfileScreen (props){
 
     return (
 
       <View>
-        <Text>{JSON.stringify(people[0].uuid)}</Text>
-        <PersonScreen name={props.name} position={props.position} institution={props.institution} uuid={props.uuid}/>
+        <PersonScreen name={people[0].name} academic_title={people[0].academic_title} department={people[0].department} institution={people[0].institution} uuid={people[0].uuid}/>
       </View>
       
     );
