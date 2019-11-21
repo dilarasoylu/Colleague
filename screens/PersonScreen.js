@@ -1,7 +1,8 @@
 import React, { Component} from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import {ButtonGroup, Button, Avatar} from 'react-native-elements'
 import { Ionicons  } from '@expo/vector-icons'
+import { Linking } from 'react-native'
 
 import Colors from '../constants/Colors';
 
@@ -47,15 +48,15 @@ export default class PersonScreen extends Component {
 
   getResults = (tab, uuid, navigation) => {
     if (tab == 0){
-      myUploads = this.getResourcesbyUUID(class_resources, this.props.uuid)
-      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, this.props.uuid))
-      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, this.props.uuid))
+      myUploads = this.getResourcesbyUUID(class_resources, this.props.fields.uuid)
+      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, this.props.fields.uuid))
+      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, this.props.fields.uuid))
     } else if (tab == 1){
-      myUploads = this.getResourcesbyUUID(class_resources, this.props.uuid)
+      myUploads = this.getResourcesbyUUID(class_resources, this.props.fields.uuid)
     } else if (tab == 2){
-      myUploads = this.getResourcesbyUUID(articles, this.props.uuid)
+      myUploads = this.getResourcesbyUUID(articles, this.props.fields.uuid)
     } else if (tab == 3){
-      myUploads = this.getResourcesbyUUID(talks, this.props.uuid)
+      myUploads = this.getResourcesbyUUID(talks, this.props.fields.uuid)
     }
     return(
       <View>
@@ -73,6 +74,24 @@ export default class PersonScreen extends Component {
     )
   };
 
+  getIcon = () =>{
+    if (this.props.fields.uuid == '0001'){
+      displayIcon ='ios-settings'
+    }
+    else{
+      displayIcon = 'ios-mail'
+    }
+    return (
+
+    <TouchableOpacity
+      onPress={() =>{ 
+        Linking.openURL('mailto:${this.props.fields.email}?subject=From Colleague');
+      }}>
+      <Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
+
+    </TouchableOpacity>
+    )
+  };
 
   
   render() {
@@ -83,12 +102,6 @@ export default class PersonScreen extends Component {
       1: 'classroom',
       2: 'articles',
       3: 'talks',
-    }
-    if (this.props.uuid == '0001'){
-      displayIcon ='ios-settings'
-    }
-    else{
-      displayIcon = 'ios-mail'
     }
 
     results = this.getResults(this.state.selectedIndex, logged_user_uuid, this.props.navigation)
@@ -104,14 +117,15 @@ export default class PersonScreen extends Component {
 	    		</View>
     			<View style={styles.rowItem}>
 	          	    <View style={styles.personDetails}>
-		          	    <Text style={styles.name}>{this.props.name}</Text>
-		              	<Text style={styles.title}>{this.props.academic_title} of {this.props.department}</Text>
-		              	<Text style={styles.institution}>{this.props.institution}</Text>
+		          	    <Text style={styles.name}>{this.props.fields.name}</Text>
+		              	<Text style={styles.profileDescription}>{this.props.fields.academic_title} of {this.props.fields.department}</Text>
+		              	<Text style={styles.profileDescription}>{this.props.fields.institution}</Text>
+                    <Text style={styles.profileDescription}>Experienced in: {this.props.fields.accessibility_type}</Text>
 
 		            </View>
 		        </View>
 		        <View style={styles.rowItem}>
-		        	<Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
+              {this.getIcon()}
 	            </View> 
           </View>
           <ButtonGroup
@@ -126,7 +140,7 @@ export default class PersonScreen extends Component {
           textStyle={{fontSize: 12, fontWeight: '700'}}
   		  />
 		  <ScrollView style={styles.scrollViewContainer}>
-            <Text>{JSON.stringify(this.props.uuid)}</Text>
+            <Text>{JSON.stringify(this.props.fields.uuid)}</Text>
             <Text>{logged_user_uuid}</Text>
 
 
@@ -182,10 +196,7 @@ const styles = StyleSheet.create({
     color: Colors.mainThemeColor,
     fontWeight: '600',
   },
-  title:{
-    fontSize:16,
-  },
-  institution:{
+  profileDescription:{
     fontSize:16,
   },
   buttons:{

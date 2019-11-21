@@ -18,7 +18,8 @@ export default function ProfileScreen (props){
     return (
 
       <View>
-        <PersonScreen name={people[0].name} academic_title={people[0].academic_title} department={people[0].department} institution={people[0].institution} uuid={people[0].uuid}/>
+
+        <PersonScreen fields={people[0]}/>
 
       </View>
       
