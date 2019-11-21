@@ -1,1 +1,1 @@
-logged_user_uuid = '0001'
+export const logged_user_uuid = '0001'

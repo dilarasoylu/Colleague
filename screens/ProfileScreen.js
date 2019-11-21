@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 
 import Images from '../constants/Images';
 
-import logged_user_uuid  from '../data/login_information.js'
+import logged_user_uuid  from '../data/login_information'
 
 import people from '../data/mockPeople'
 
@@ -19,6 +19,7 @@ export default function ProfileScreen (props){
 
       <View>
         <PersonScreen name={people[0].name} academic_title={people[0].academic_title} department={people[0].department} institution={people[0].institution} uuid={people[0].uuid}/>
+
       </View>
       
     );

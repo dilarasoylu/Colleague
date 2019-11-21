@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
 import {ButtonGroup, Button, Avatar} from 'react-native-elements'
 import { Ionicons  } from '@expo/vector-icons'
-import { PeopleThumbnail } from '../components/Thumbnails';
 
 import Colors from '../constants/Colors';
 
@@ -12,13 +11,14 @@ import {logged_user_uuid} from '../data/login_information';
 import talks from '../data/mockTalks';
 import class_resources from '../data/mockClassResources';
 import articles from '../data/mockArticles';
+import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnail } from '../components/Thumbnails';
 
 
 export default class PersonScreen extends Component {
 	constructor(props) {
 	  super(props)
 	  this.state = {
-	    selectedIndex: 2
+	    selectedIndex: 0
 	  }
 	  this.updateIndex = this.updateIndex.bind(this)
 	};
@@ -29,33 +29,46 @@ export default class PersonScreen extends Component {
 
 
   getResourcesbyUUID = (array, uuid) => {
-    add = []
+    myUploads = []
     for (let i in array){
       if (array[i].creator_uuid == '0001'){
-        add.push(array[i])
+        myUploads.push(array[i])
       }
     }
-    return add
+    return myUploads
   };
 
-  getResults = (tab, uuid) => {
+  thumbnailMatching = {
+    Classroom: ClassResourceThumbnail,
+    Article: ArticleThumbnail,
+    Talk: TalkThumbnail,
+    People: PeopleThumbnail
+  }
+
+  getResults = (tab, uuid, navigation) => {
     if (tab == 0){
-      add = this.getResourcesbyUUID(class_resources, this.props.uuid)
-      add = add.concat(this.getResourcesbyUUID(talks, this.props.uuid))
-      add = add.concat(this.getResourcesbyUUID(articles, this.props.uuid))
+      myUploads = this.getResourcesbyUUID(class_resources, this.props.uuid)
+      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, this.props.uuid))
+      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, this.props.uuid))
     } else if (tab == 1){
-      add = this.getResourcesbyUUID(class_resources, this.props.uuid)
+      myUploads = this.getResourcesbyUUID(class_resources, this.props.uuid)
     } else if (tab == 2){
-      add = this.getResourcesbyUUID(articles, this.props.uuid)
+      myUploads = this.getResourcesbyUUID(articles, this.props.uuid)
     } else if (tab == 3){
-      add = this.getResourcesbyUUID(talks, this.props.uuid)
+      myUploads = this.getResourcesbyUUID(talks, this.props.uuid)
     }
     return(
-    <View>
-    <Text>{JSON.stringify(add)}</Text>
-    <Text>{tab}</Text>
-    <PeopleThumbnail/>
-    <PeopleThumbnail/>
+      <View>
+      {
+        myUploads.map((mockItem) => {
+          ThumbnailClass = thumbnailMatching[mockItem['resource_type']]
+          return (
+            <ThumbnailClass
+              navigation={navigation}
+              fields={mockItem}/>
+          );
+        })
+      }
     </View>
     )
   };
@@ -78,7 +91,7 @@ export default class PersonScreen extends Component {
       displayIcon = 'ios-mail'
     }
 
-    results = this.getResults(this.state.selectedIndex, logged_user_uuid)
+    results = this.getResults(this.state.selectedIndex, logged_user_uuid, this.props.navigation)
  
 
     return (
@@ -128,8 +141,8 @@ export default class PersonScreen extends Component {
 
 
 const styles = StyleSheet.create({
-  containter: {
-  	flex: 1
+  container:{
+
   },
   pictureView: {
   	marginLeft: 20,
@@ -187,8 +200,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     borderColor: 'white',
     height: 40, 
-    marginLeft:10, 
-    marginRight:10
+    paddingHorizontal: 10, 
   },
   scrollViewContainer: {
     paddingHorizontal: 20

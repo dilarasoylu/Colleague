@@ -22,5 +22,29 @@ mockPeople = [
     academic_title: 'Professor',
     department: 'Mechanical Engineering',
     profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
-  }
+  },
+  {
+    resource_type: 'People',
+    accessibility_type: ['Vision'],
+    subjects: ['Arts'],
+    uuid: '0003',
+    name: 'Maria Gomez',
+    email: 'mgomez@colorado.edu',
+    institution: 'University of Colorado Boulder',
+    academic_title: 'Professor',
+    department: 'Art History',
+    profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
+  },
+  {
+    resource_type: 'People',
+    accessibility_type: ['Attention'],
+    subjects: ['Math'],
+    uuid: '0004',
+    name: 'Macy Chang',
+    email: 'macychang@mit.edu',
+    institution: 'Massachusetts Institute of Technology',
+    academic_title: 'Professor',
+    department: 'Math',
+    profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
+  },
 ]

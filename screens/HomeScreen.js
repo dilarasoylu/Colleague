@@ -7,7 +7,7 @@ import { PeopleThumbnail } from '../components/Thumbnails';
 import Colors from '../constants/Colors';
 
 import Images from '../constants/Images';
-import logged_user_uuid  from '../data/login_information.js'
+import logged_user_uuid  from '../data/login_information'
 
 
 
