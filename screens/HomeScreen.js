@@ -23,11 +23,11 @@ export default class PersonScreen extends Component {
   updateIndex (selectedIndex) {
     this.setState({selectedIndex})
   };
- 
+
   render() {
     const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
     const { selectedIndex } = this.state
-    
+
 
     return (
       <View style={styles.container}>
@@ -39,15 +39,10 @@ export default class PersonScreen extends Component {
             <Text style={styles.title}>Colleague</Text>
           </View>
         </View>
-        
+
         <ScrollView style={styles.scrollViewContainer}>
-          <PeopleThumbnail/>
-          <PeopleThumbnail/>
-          <PeopleThumbnail/>
-          <PeopleThumbnail/>
-          <PeopleThumbnail/>
-          <PeopleThumbnail/>
-        </ScrollView>      
+          <Text>Content</Text>
+        </ScrollView>
       </View>
     );
   }
@@ -56,7 +51,7 @@ export default class PersonScreen extends Component {
 const styles = StyleSheet.create({
   containter: {
     flex: 1
-  },  
+  },
   topView: {
     paddingHorizontal: 20,
     flexDirection: 'row',
@@ -65,10 +60,10 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     paddingHorizontal: 20
-  },  
+  },
   rowItem: {
     marginTop: 10,
-    marginRight: 10, 
+    marginRight: 10,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-start',

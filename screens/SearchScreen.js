@@ -8,6 +8,7 @@ import mockArticles from '../data/mockArticles';
 import mockClassResources from '../data/mockClassResources';
 import mockPeople from '../data/mockPeople';
 import mockTalks from '../data/mockTalks';
+import { logged_user_uuid } from '../data/login_information';
 import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnail } from '../components/Thumbnails';
 
 export default class SearchScreen extends Component {
@@ -53,6 +54,7 @@ export default class SearchScreen extends Component {
           filter_options.map((option) => {
             return (
               <Button
+                key={option}
                 title={option}
                 color={this.state.filterState[filter_type][option] ? Colors.mainThemeColor : Colors.lightGray}
                 onPress={() => {
@@ -138,7 +140,6 @@ function getSearchResults(filterState, navigation) {
   allMockData = allMockData.filter(mockItem => {
     if (resourceFilterOn &&
         !filterState['Resource'][mockItem['resource_type']]) {
-      console.log('resource filter failed')
       return false
     }
     if (accessibilityFilterOn) {
@@ -153,6 +154,14 @@ function getSearchResults(filterState, navigation) {
       })
       if (filteredList.length == 0) { return false }
     }
+    return true
+  })
+
+  allMockData = allMockData.filter(mockItem => {
+    if (mockItem['resource_type'] == 'People' &&
+        mockItem['uuid'] == logged_user_uuid) {
+          return false
+        }
     return true
   })
 

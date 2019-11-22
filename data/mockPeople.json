@@ -14,13 +14,13 @@ mockPeople = [
   {
     resource_type: 'People',
     accessibility_type: ['Hearing'],
-    subjects: ['ME'],
+    subjects: ['CS'],
     uuid: '0002',
     name: 'Jessica Jane',
     email: 'jessica@ucla.edu',
-    institution: 'University of California Los Angeles',
+    institution: 'UCLA',
     academic_title: 'Professor',
-    department: 'Mechanical Engineering',
+    department: 'Computer Science',
     profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
   },
   {
@@ -30,7 +30,7 @@ mockPeople = [
     uuid: '0003',
     name: 'Maria Gomez',
     email: 'mgomez@colorado.edu',
-    institution: 'University of Colorado Boulder',
+    institution: 'Colorado Boulder',
     academic_title: 'Professor',
     department: 'Art History',
     profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
@@ -42,7 +42,7 @@ mockPeople = [
     uuid: '0004',
     name: 'Macy Chang',
     email: 'macychang@mit.edu',
-    institution: 'Massachusetts Institute of Technology',
+    institution: 'MIT',
     academic_title: 'Professor',
     department: 'Math',
     profile_image_uri: 'https://bootdey.com/img/Content/avatar/avatar7.png'
