@@ -18,6 +18,8 @@ import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnai
 export default class PersonScreen extends Component {
 	constructor(props) {
 	  super(props)
+		// Example access
+		console.log(this.props.navigation.getParam('name'))
 	  this.state = {
 	    selectedIndex: 0
 	  }
@@ -84,7 +86,7 @@ export default class PersonScreen extends Component {
     return (
 
     <TouchableOpacity
-      onPress={() =>{ 
+      onPress={() =>{
         Linking.openURL('mailto:${this.props.fields.email}?subject=From Colleague');
       }}>
       <Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
@@ -93,7 +95,7 @@ export default class PersonScreen extends Component {
     )
   };
 
-  
+
   render() {
   	const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
   	const { selectedIndex } = this.state
@@ -105,7 +107,7 @@ export default class PersonScreen extends Component {
     }
 
     results = this.getResults(this.state.selectedIndex, logged_user_uuid, this.props.navigation)
- 
+
 
     return (
       <View style={styles.container}>
@@ -126,7 +128,7 @@ export default class PersonScreen extends Component {
 		        </View>
 		        <View style={styles.rowItem}>
               {this.getIcon()}
-	            </View> 
+	            </View>
           </View>
           <ButtonGroup
 		      onPress={this.updateIndex}
@@ -210,8 +212,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     borderColor: 'white',
-    height: 40, 
-    paddingHorizontal: 10, 
+    height: 40,
+    paddingHorizontal: 10,
   },
   scrollViewContainer: {
     paddingHorizontal: 20
