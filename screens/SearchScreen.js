@@ -8,7 +8,7 @@ import mockArticles from '../data/mockArticles';
 import mockClassResources from '../data/mockClassResources';
 import mockPeople from '../data/mockPeople';
 import mockTalks from '../data/mockTalks';
-import { logged_user_uuid } from '../data/login_information';
+import { loggedUserUuid } from '../data/loginData';
 import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnail } from '../components/Thumbnails';
 
 export default class SearchScreen extends Component {
@@ -159,7 +159,7 @@ function getSearchResults(filterState, navigation) {
 
   allMockData = allMockData.filter(mockItem => {
     if (mockItem['resource_type'] == 'People' &&
-        mockItem['uuid'] == logged_user_uuid) {
+        mockItem['uuid'] == loggedUserUuid) {
           return false
         }
     return true

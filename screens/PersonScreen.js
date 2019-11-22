@@ -7,7 +7,7 @@ import { Linking } from 'react-native'
 import Colors from '../constants/Colors';
 
 import Images from '../constants/Images';
-import {logged_user_uuid} from '../data/login_information';
+import { loggedUserUuid } from '../data/loginData';
 
 import talks from '../data/mockTalks';
 import class_resources from '../data/mockClassResources';
@@ -34,7 +34,7 @@ export default class PersonScreen extends Component {
   getResourcesbyUUID = (array, uuid) => {
     myUploads = []
     for (let i in array){
-      if (array[i].creator_uuid == '0001'){
+      if (array[i].creator_uuid == loggedUserUuid){
         myUploads.push(array[i])
       }
     }
@@ -77,18 +77,21 @@ export default class PersonScreen extends Component {
   };
 
   getIcon = () =>{
-    if (this.props.navigation.getParam('uuid') == '0001'){
-      displayIcon ='ios-settings'
+    if (this.props.navigation.getParam('uuid') == loggedUserUuid){
+      displayIcon = 'ios-settings'
+			onIconPress = () => {}
     }
     else{
       displayIcon = 'ios-mail'
+			onIconPress = () => {
+				var email = this.props.navigation.getParam('email')
+				Linking.openURL(`mailto:${email}?subject=From Colleague`);
+			}
     }
     return (
 
     <TouchableOpacity
-      onPress={() =>{
-        Linking.openURL('mailto:example@blank.com?subject=From Colleague');
-      }}>
+      onPress={onIconPress}>
       <Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
 
     </TouchableOpacity>
@@ -106,7 +109,7 @@ export default class PersonScreen extends Component {
       3: 'talks',
     }
 
-    results = this.getResults(this.state.selectedIndex, logged_user_uuid, this.props.navigation)
+    results = this.getResults(this.state.selectedIndex, loggedUserUuid, this.props.navigation)
 
 
     return (
@@ -143,7 +146,7 @@ export default class PersonScreen extends Component {
   		  />
 		  <ScrollView style={styles.scrollViewContainer}>
             {/* <Text>{JSON.stringify(this.props.navigation.getParam('uuid'))}</Text>
-             <Text>{logged_user_uuid}</Text> */}
+             <Text>{loggedUserUuid}</Text> */}
 
 
 

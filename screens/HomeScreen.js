@@ -5,29 +5,11 @@ import { Ionicons  } from '@expo/vector-icons'
 import { PeopleThumbnail } from '../components/Thumbnails';
 
 import Colors from '../constants/Colors';
-
 import Images from '../constants/Images';
-import logged_user_uuid  from '../data/login_information'
 
-
-
-export default class PersonScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedIndex: 2
-    }
-    this.updateIndex = this.updateIndex.bind(this)
-  };
-
-  updateIndex (selectedIndex) {
-    this.setState({selectedIndex})
-  };
+export default class HomeScreen extends Component {
 
   render() {
-    const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
-    const { selectedIndex } = this.state
-
 
     return (
       <View style={styles.container}>
@@ -77,8 +59,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: Colors.mainThemeColor,
     fontWeight: '700',
-  },
-
-
-
+  }
 });
