@@ -7,7 +7,26 @@ export function ArticleThumbnail(props) {
   return (
     <TouchableOpacity
       style={styles.thumbnailContainer}>
-      <Text>{JSON.stringify(props.fields)}</Text>
+      <View style={styles.thumbnailImageOuterContainer}>
+        <Image
+          style={styles.thumbnailImageInnerContainer}
+          source={require('../assets/images/article.png')}
+        />
+      </View>
+      <View style={styles.thumbnailTextContainer}>
+      <Text style={styles.thumbnailTitleStyle}>{props.fields.resource_type}</Text>
+        <View styles={styles.thumbnailTextRow}>
+          <View>
+            <Text style={styles.thumbnailSecondaryTitleStyle}>{props.fields.title}</Text>
+          </View>
+        </View>
+        <View styles={styles.thumbnailTextRow}>
+          <Text style={styles.thumbnailBodyTextStyle}>Subjects: {props.fields.subjects.join()}</Text>
+        </View>
+        <View styles={styles.thumbnailTextRow}>
+          <Text style={styles.thumbnailBodyTextStyle}>Tailored for accessibility needs: {props.fields.accessibility_type.join()}</Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -16,7 +35,26 @@ export function ClassResourceThumbnail(props) {
   return (
     <TouchableOpacity
       style={styles.thumbnailContainer}>
-      <Text>{JSON.stringify(props.fields)}</Text>
+      <View style={styles.thumbnailImageOuterContainer}>
+        <Image
+          style={styles.thumbnailImageInnerContainer}
+          source={require('../assets/images/class-resource.png')}
+        />
+      </View>
+      <View style={styles.thumbnailTextContainer}>
+      <Text style={styles.thumbnailTitleStyle}>Class Resource</Text>
+        <View styles={styles.thumbnailTextRow}>
+          <View>
+            <Text style={styles.thumbnailSecondaryTitleStyle}>{props.fields.title}</Text>
+          </View>
+        </View>
+        <View styles={styles.thumbnailTextRow}>
+          <Text style={styles.thumbnailBodyTextStyle}>Subjects: {props.fields.subjects.join()}</Text>
+        </View>
+        <View styles={styles.thumbnailTextRow}>
+          <Text style={styles.thumbnailBodyTextStyle}>Tailored for accessibility needs: {props.fields.accessibility_type.join()}</Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -48,9 +86,6 @@ export function PeopleThumbnail(props) {
         <View styles={styles.thumbnailTextRow}>
           <Text style={styles.thumbnailBodyTextStyle}>Taught students with accessibility needs: {props.fields.accessibility_type.join()}</Text>
         </View>
-        <View styles={styles.thumbnailTextRow}>
-          <Text style={styles.thumbnailBodyTextStyle}>Resource type: People</Text>
-        </View>
       </View>
     </TouchableOpacity>
   );
@@ -60,7 +95,26 @@ export function TalkThumbnail(props) {
   return (
     <TouchableOpacity
       style={styles.thumbnailContainer}>
-      <Text>{JSON.stringify(props.fields)}</Text>
+      <View style={styles.thumbnailImageOuterContainer}>
+        <Image
+          style={styles.thumbnailImageInnerContainer}
+          source={require('../assets/images/talk.png')}
+        />
+      </View>
+      <View style={styles.thumbnailTextContainer}>
+      <Text style={styles.thumbnailTitleStyle}>{props.fields.resource_type}</Text>
+        <View styles={styles.thumbnailTextRow}>
+          <View>
+            <Text style={styles.thumbnailSecondaryTitleStyle}>{props.fields.title}</Text>
+          </View>
+        </View>
+        <View styles={styles.thumbnailTextRow}>
+          <Text style={styles.thumbnailBodyTextStyle}>Subjects: {props.fields.subjects.join()}</Text>
+        </View>
+        <View styles={styles.thumbnailTextRow}>
+          <Text style={styles.thumbnailBodyTextStyle}>Tailored for accessibility needs: {props.fields.accessibility_type.join()}</Text>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 }
