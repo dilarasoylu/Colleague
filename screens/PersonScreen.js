@@ -114,6 +114,7 @@ export default class PersonScreen extends Component {
 
     return (
       <View style={styles.container}>
+				<View styles={styles.personInformationContainer}>
           <View style={styles.pictureView}>
           		<View style={styles.rowItem}>
 	          	    <Avatar rounded size='large' source={{
@@ -133,7 +134,8 @@ export default class PersonScreen extends Component {
               {this.getIcon()}
 	            </View>
           </View>
-          <ButtonGroup
+				</View>
+        <ButtonGroup
 		      onPress={this.updateIndex}
 		      selectedIndex={selectedIndex}
 		      buttons={buttons}
@@ -143,15 +145,10 @@ export default class PersonScreen extends Component {
           selectedButtonStyle={styles.selectedButton}
           innerBorderStyle={{color: 'white'}}
           textStyle={{fontSize: 12, fontWeight: '700'}}
-  		  />
-		  <ScrollView style={styles.scrollViewContainer}>
-            {/* <Text>{JSON.stringify(this.props.navigation.getParam('uuid'))}</Text>
-             <Text>{loggedUserUuid}</Text> */}
-
-
-
-      	{results}
-      </ScrollView>
+		  	/>
+			  <ScrollView style={styles.scrollViewContainer}>
+	      	{results}
+	      </ScrollView>
       </View>
     );
   }
@@ -176,7 +173,8 @@ const styles = StyleSheet.create({
   	marginRight: 10,
   },
   rowItem: {
-    marginTop: 10,
+    marginTop: 15,
+		marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -203,6 +201,7 @@ const styles = StyleSheet.create({
   },
   profileDescription:{
     fontSize:16,
+		color: Colors.lightGray
   },
   buttons:{
     borderBottomColor: Colors.mainThemeColor,
@@ -220,6 +219,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     paddingHorizontal: 20
-  }
-
+  },
+	personInformationContainer: {
+	}
 });
