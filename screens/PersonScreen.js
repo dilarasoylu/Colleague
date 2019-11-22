@@ -50,15 +50,15 @@ export default class PersonScreen extends Component {
 
   getResults = (tab, uuid, navigation) => {
     if (tab == 0){
-      myUploads = this.getResourcesbyUUID(class_resources, this.props.fields.uuid)
-      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, this.props.fields.uuid))
-      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, this.props.fields.uuid))
+      myUploads = this.getResourcesbyUUID(class_resources, this.props.navigation.getParam('uuid'))
+      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, this.props.navigation.getParam('uuid')))
+      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, this.props.navigation.getParam('uuid')))
     } else if (tab == 1){
-      myUploads = this.getResourcesbyUUID(class_resources, this.props.fields.uuid)
+      myUploads = this.getResourcesbyUUID(class_resources, this.props.navigation.getParam('uuid'))
     } else if (tab == 2){
-      myUploads = this.getResourcesbyUUID(articles, this.props.fields.uuid)
+      myUploads = this.getResourcesbyUUID(articles, this.props.navigation.getParam('uuid'))
     } else if (tab == 3){
-      myUploads = this.getResourcesbyUUID(talks, this.props.fields.uuid)
+      myUploads = this.getResourcesbyUUID(talks, this.props.navigation.getParam('uuid'))
     }
     return(
       <View>
@@ -77,7 +77,7 @@ export default class PersonScreen extends Component {
   };
 
   getIcon = () =>{
-    if (this.props.fields.uuid == '0001'){
+    if (this.props.navigation.getParam('uuid') == '0001'){
       displayIcon ='ios-settings'
     }
     else{
@@ -87,7 +87,7 @@ export default class PersonScreen extends Component {
 
     <TouchableOpacity
       onPress={() =>{
-        Linking.openURL('mailto:${this.props.fields.email}?subject=From Colleague');
+        Linking.openURL('mailto:example@blank.com?subject=From Colleague');
       }}>
       <Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
 
@@ -114,15 +114,15 @@ export default class PersonScreen extends Component {
           <View style={styles.pictureView}>
           		<View style={styles.rowItem}>
 	          	    <Avatar rounded size='large' source={{
-	    				uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
+	    				uri: this.props.navigation.getParam('profile_image_uri')
 	    			}}/>
 	    		</View>
     			<View style={styles.rowItem}>
 	          	    <View style={styles.personDetails}>
-		          	    <Text style={styles.name}>{this.props.fields.name}</Text>
-		              	<Text style={styles.profileDescription}>{this.props.fields.academic_title} of {this.props.fields.department}</Text>
-		              	<Text style={styles.profileDescription}>{this.props.fields.institution}</Text>
-                    <Text style={styles.profileDescription}>Experienced in: {this.props.fields.accessibility_type}</Text>
+		          	    <Text style={styles.name}>{this.props.navigation.getParam('name')}</Text>
+		              	<Text style={styles.profileDescription}>{this.props.navigation.getParam('academic_title')} of {this.props.navigation.getParam('department')}</Text>
+		              	<Text style={styles.profileDescription}>{this.props.navigation.getParam('institution')}</Text>
+                    <Text style={styles.profileDescription}>Experienced in: {this.props.navigation.getParam('accessibility_type')}</Text>
 
 		            </View>
 		        </View>
@@ -142,8 +142,8 @@ export default class PersonScreen extends Component {
           textStyle={{fontSize: 12, fontWeight: '700'}}
   		  />
 		  <ScrollView style={styles.scrollViewContainer}>
-            <Text>{JSON.stringify(this.props.fields.uuid)}</Text>
-            <Text>{logged_user_uuid}</Text>
+            {/* <Text>{JSON.stringify(this.props.navigation.getParam('uuid'))}</Text>
+             <Text>{logged_user_uuid}</Text> */}
 
 
 
