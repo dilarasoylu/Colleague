@@ -10,6 +10,8 @@ import SearchScreen from '../screens/SearchScreen';
 import SaveScreen from '../screens/SaveScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import PersonScreen from '../screens/PersonScreen';
+import UploadScreen from '../screens/UploadScreen';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -40,7 +42,7 @@ HomeStack.path = '';
 const SearchStack = createStackNavigator(
   {
     Search: SearchScreen,
-    People: PersonScreen
+    People: PersonScreen,
   },
   config
 );
@@ -73,6 +75,7 @@ SaveStack.path = '';
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
+    Upload: UploadScreen,
   },
   config
 );

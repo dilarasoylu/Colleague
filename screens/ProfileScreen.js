@@ -18,9 +18,7 @@ export default function ProfileScreen (props){
     return (
 
       <View>
-
         <PersonScreen fields={people[0]}/>
-
       </View>
 
     );

@@ -18,11 +18,32 @@ import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnai
 export default class PersonScreen extends Component {
 	constructor(props) {
 	  super(props)
-		// Example access
-		console.log(this.props.navigation.getParam('name'))
+		// Example access      console.log(this.props.navigation.getParam('name'))
+    if(this.props.navigation){
+      accessibility_type = this.props.navigation.getParam('accessibility_type')
+      subjects = this.props.navigation.getParam('subjects')
+      uuid = this.props.navigation.getParam('uuid')
+      name = this.props.navigation.getParam('name')
+      email = this.props.navigation.getParam('email')
+      institution = this.props.navigation.getParam('institution')
+      academic_title = this.props.navigation.getParam('academic_title')
+      department= this.props.navigation.getParam('department')
+      profile_image_uri = this.props.navigation.getParam('profile_image_uri')
+    } else {
+      accessibility_type = this.props.fields.accessibility_type
+      subjects = this.props.fields.subjects
+      uuid = this.props.fields.uuid
+      name = this.props.fields.name
+      email = this.props.fields.email
+      institution = this.props.fields.institution
+      academic_title = this.props.fields.academic_title
+      department= this.props.fields.department
+      profile_image_uri = this.props.fields.profile_image_uri
+    }
 	  this.state = {
-	    selectedIndex: 0
+	    selectedIndex: 0,
 	  }
+ 
 	  this.updateIndex = this.updateIndex.bind(this)
 	};
 
@@ -50,15 +71,15 @@ export default class PersonScreen extends Component {
 
   getResults = (tab, uuid, navigation) => {
     if (tab == 0){
-      myUploads = this.getResourcesbyUUID(class_resources, this.props.navigation.getParam('uuid'))
-      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, this.props.navigation.getParam('uuid')))
-      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, this.props.navigation.getParam('uuid')))
+      myUploads = this.getResourcesbyUUID(class_resources, uuid)
+      myUploads = myUploads.concat(this.getResourcesbyUUID(talks, uuid))
+      myUploads= myUploads.concat(this.getResourcesbyUUID(articles, uuid))
     } else if (tab == 1){
-      myUploads = this.getResourcesbyUUID(class_resources, this.props.navigation.getParam('uuid'))
+      myUploads = this.getResourcesbyUUID(class_resources, uuid)
     } else if (tab == 2){
-      myUploads = this.getResourcesbyUUID(articles, this.props.navigation.getParam('uuid'))
+      myUploads = this.getResourcesbyUUID(articles, uuid)
     } else if (tab == 3){
-      myUploads = this.getResourcesbyUUID(talks, this.props.navigation.getParam('uuid'))
+      myUploads = this.getResourcesbyUUID(talks, uuid)
     }
     return(
       <View>
@@ -77,14 +98,13 @@ export default class PersonScreen extends Component {
   };
 
   getIcon = () =>{
-    if (this.props.navigation.getParam('uuid') == loggedUserUuid){
+    if (uuid == loggedUserUuid){
       displayIcon = 'ios-settings'
 			onIconPress = () => {}
     }
     else{
       displayIcon = 'ios-mail'
 			onIconPress = () => {
-				var email = this.props.navigation.getParam('email')
 				Linking.openURL(`mailto:${email}?subject=From Colleague`);
 			}
     }
@@ -98,6 +118,18 @@ export default class PersonScreen extends Component {
     )
   };
 
+  getAddButton = () =>{
+    displayIcon = 'ios-add-circle'
+
+    return (
+
+    <TouchableOpacity
+      onPress={() => this.props.navigation.navigate('Upload')}>
+      <Ionicons name={displayIcon} size={40} color={Colors.mainThemeColor} />
+
+    </TouchableOpacity>
+    )
+  };
 
   render() {
   	const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
@@ -118,15 +150,15 @@ export default class PersonScreen extends Component {
           <View style={styles.pictureView}>
           		<View style={styles.rowItem}>
 	          	    <Avatar rounded size='large' source={{
-	    				uri: this.props.navigation.getParam('profile_image_uri')
+	    				uri: profile_image_uri
 	    			}}/>
 	    		</View>
     			<View style={styles.rowItem}>
 	          	    <View style={styles.personDetails}>
-		          	    <Text style={styles.name}>{this.props.navigation.getParam('name')}</Text>
-		              	<Text style={styles.profileDescription}>{this.props.navigation.getParam('academic_title')} of {this.props.navigation.getParam('department')}</Text>
-		              	<Text style={styles.profileDescription}>{this.props.navigation.getParam('institution')}</Text>
-                    <Text style={styles.profileDescription}>Experienced in: {this.props.navigation.getParam('accessibility_type')}</Text>
+		          	    <Text style={styles.name}>{name}</Text>
+		              	<Text style={styles.profileDescription}>{academic_title} of {department}</Text>
+		              	<Text style={styles.profileDescription}>{institution}</Text>
+                    <Text style={styles.profileDescription}>Experienced in: {accessibility_type}</Text>
 
 		            </View>
 		        </View>
@@ -149,6 +181,9 @@ export default class PersonScreen extends Component {
 			  <ScrollView style={styles.scrollViewContainer}>
 	      	{results}
 	      </ScrollView>
+        <View style={styles.addButton}>
+          {this.getAddButton()}
+        </View>
       </View>
     );
   }
@@ -158,7 +193,6 @@ export default class PersonScreen extends Component {
 
 const styles = StyleSheet.create({
   container:{
-
   },
   pictureView: {
   	marginLeft: 20,
@@ -221,5 +255,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
 	personInformationContainer: {
-	}
+	},
+  addButton: {
+    alignSelf:'center',
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
 });
