@@ -18,18 +18,8 @@ import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnai
 export default class PersonScreen extends Component {
 	constructor(props) {
 	  super(props)
-		// Example access      console.log(this.props.navigation.getParam('name'))
-    if(this.props.navigation){
-      accessibility_type = this.props.navigation.getParam('accessibility_type')
-      subjects = this.props.navigation.getParam('subjects')
-      uuid = this.props.navigation.getParam('uuid')
-      name = this.props.navigation.getParam('name')
-      email = this.props.navigation.getParam('email')
-      institution = this.props.navigation.getParam('institution')
-      academic_title = this.props.navigation.getParam('academic_title')
-      department= this.props.navigation.getParam('department')
-      profile_image_uri = this.props.navigation.getParam('profile_image_uri')
-    } else {
+    if(this.props.fields){
+      console.log(this.props.fields)
       accessibility_type = this.props.fields.accessibility_type
       subjects = this.props.fields.subjects
       uuid = this.props.fields.uuid
@@ -39,7 +29,19 @@ export default class PersonScreen extends Component {
       academic_title = this.props.fields.academic_title
       department= this.props.fields.department
       profile_image_uri = this.props.fields.profile_image_uri
-    }
+    }else{
+      console.log("navigation: ")
+      console.log(this.props.navigation)
+      accessibility_type = this.props.navigation.getParam('accessibility_type')
+      subjects = this.props.navigation.getParam('subjects')
+      uuid = this.props.navigation.getParam('uuid')
+      name = this.props.navigation.getParam('name')
+      email = this.props.navigation.getParam('email')
+      institution = this.props.navigation.getParam('institution')
+      academic_title = this.props.navigation.getParam('academic_title')
+      department= this.props.navigation.getParam('department')
+      profile_image_uri = this.props.navigation.getParam('profile_image_uri')
+    } 
 	  this.state = {
 	    selectedIndex: 0,
 	  }
@@ -120,14 +122,18 @@ export default class PersonScreen extends Component {
 
   getAddButton = () =>{
     displayIcon = 'ios-add-circle'
+    console.log("add button navigation")
+    console.log(this.props.navigation)
 
     return (
 
     <TouchableOpacity
+    //fix the onpress currently not navigating to Upload page
       onPress={() => this.props.navigation.navigate('Upload')}>
       <Ionicons name={displayIcon} size={40} color={Colors.mainThemeColor} />
 
     </TouchableOpacity>
+
     )
   };
 
@@ -193,6 +199,8 @@ export default class PersonScreen extends Component {
 
 const styles = StyleSheet.create({
   container:{
+    flexDirection: 'column',
+    flex: 1,
   },
   pictureView: {
   	marginLeft: 20,

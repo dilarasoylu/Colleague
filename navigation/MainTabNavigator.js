@@ -75,6 +75,7 @@ SaveStack.path = '';
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
+    People: PersonScreen,
     Upload: UploadScreen,
   },
   config

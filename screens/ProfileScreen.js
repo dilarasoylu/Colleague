@@ -15,17 +15,10 @@ import people from '../data/mockPeople'
 
 export default function ProfileScreen (props){
 
-    return (
-
-      <View>
+    return ( 
         <PersonScreen fields={people[0]}/>
-      </View>
-
     );
+   	
 }
 
-const styles = StyleSheet.create({
-  containter: {
-  	flex: 1
-  },
-});
+
