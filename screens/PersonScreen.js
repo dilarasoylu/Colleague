@@ -124,9 +124,9 @@ export default class PersonScreen extends Component {
     displayIcon = 'ios-add-circle'
     console.log("add button navigation")
     console.log(this.props.navigation)
+    if (this.state.selectedIndex==0){ // && !this.props.navigation){
 
     return (
-
     <TouchableOpacity
     //fix the onpress currently not navigating to Upload page
       onPress={() => this.props.navigation.navigate('Upload')}>
@@ -135,6 +135,7 @@ export default class PersonScreen extends Component {
     </TouchableOpacity>
 
     )
+  }
   };
 
   render() {
