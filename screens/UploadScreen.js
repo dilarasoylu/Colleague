@@ -131,9 +131,7 @@ export default class UploadScreen extends Component {
     return (
     <View>
      <View style={styles.header}>
-        <View style={styles.backButton}>
-          {this.getBackButton()}
-        </View>
+       
         <View style={styles.wrapTitle}>
           <Text style={styles.title}>Upload a Class Resource</Text>
         </View>
@@ -144,7 +142,9 @@ export default class UploadScreen extends Component {
      </View>
       <View style={styles.entry}>
         <Text style={styles.entryTitle}>Description</Text>
-        <TextInput style={styles.inputBox}/>
+        <TextInput style={styles.inputBoxBig}
+          multiline={true}
+        />
      </View> 
      <View style={styles.entry}>
       <Text style={styles.entryTitle}>Subject</Text>
@@ -194,6 +194,17 @@ const styles = StyleSheet.create({
   }, 
   inputBox:{
     height: 40, 
+    borderColor: 'white', 
+    backgroundColor: Colors.whiteComponentColor,
+    marginVertical: 8,
+    shadowOffset: {height: 0, width: 0},
+    shadowColor: Colors.shadowColor,
+    shadowOpacity: 1,
+    shadowRadius: 3,
+    flexDirection: 'row'
+  },
+  inputBoxBig:{
+    height: 90, 
     borderColor: 'white', 
     backgroundColor: Colors.whiteComponentColor,
     marginVertical: 8,
