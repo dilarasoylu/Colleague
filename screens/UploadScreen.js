@@ -65,7 +65,7 @@ export default class UploadScreen extends Component {
 
   getSubmitButton = () =>{
     const {goBack} = this.props.navigation;
-        // onPress={() => {goBack()}}>
+    // onPress={() => {goBack()}}>
 
     return(
     <TouchableOpacity style={styles.submitButton}
