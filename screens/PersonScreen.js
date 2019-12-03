@@ -64,6 +64,20 @@ export default class PersonScreen extends Component {
     return myUploads
   };
 
+  getExperienceTypes = (accessibility_type) => {
+    if (accessibility_type.length == 1) return accessibility_type[0]
+    str = ""
+    if (accessibility_type.length ==2){
+      return str.concat(accessibility_type[0]," & ", accessibility_type[1])
+    } 
+    for (i=0; i<accessibility_type.length-1; i++){
+      console.log(str)
+      str = str.concat(accessibility_type[i], ', ')
+    }
+    str = str.concat('& ', accessibility_type[accessibility_type.length-1])
+    return str
+  }
+
   thumbnailMatching = {
     Classroom: ClassResourceThumbnail,
     Article: ArticleThumbnail,
@@ -149,7 +163,7 @@ export default class PersonScreen extends Component {
     }
 
     results = this.getResults(this.state.selectedIndex, loggedUserUuid, this.props.navigation)
-
+    experienceStr = this.getExperienceTypes(accessibility_type)
 
     return (
       <View style={styles.container}>
@@ -165,7 +179,7 @@ export default class PersonScreen extends Component {
 		          	    <Text style={styles.name}>{name}</Text>
 		              	<Text style={styles.profileDescription}>{academic_title} of {department}</Text>
 		              	<Text style={styles.profileDescription}>{institution}</Text>
-                    <Text style={styles.profileDescription}>Experienced in: {accessibility_type}</Text>
+                    <Text style={styles.profileDescription}>Experienced in: {experienceStr}</Text>
 
 		            </View>
 		        </View>
