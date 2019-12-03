@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
+import {Alert, View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import {ButtonGroup, Button, Avatar} from 'react-native-elements'
 import { Ionicons  } from '@expo/vector-icons'
 import { Linking } from 'react-native'
@@ -16,8 +16,8 @@ import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnai
 
 
 export default class PersonScreen extends Component {
-	constructor(props) {
-	  super(props)
+  constructor(props) {
+    super(props)
     if(this.props.fields){
       console.log(this.props.fields)
       accessibility_type = this.props.fields.accessibility_type
@@ -42,16 +42,16 @@ export default class PersonScreen extends Component {
       department= this.props.navigation.getParam('department')
       profile_image_uri = this.props.navigation.getParam('profile_image_uri')
     } 
-	  this.state = {
-	    selectedIndex: 0,
-	  }
+    this.state = {
+      selectedIndex: 0,
+    }
  
-	  this.updateIndex = this.updateIndex.bind(this)
-	};
+    this.updateIndex = this.updateIndex.bind(this)
+  };
 
-	updateIndex (selectedIndex) {
-	  this.setState({selectedIndex})
-	};
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
+  };
 
 
   getResourcesbyUUID = (array, uuid) => {
@@ -116,13 +116,13 @@ export default class PersonScreen extends Component {
   getIcon = () =>{
     if (uuid == loggedUserUuid){
       displayIcon = 'ios-settings'
-			onIconPress = () => {}
+      onIconPress = () => {}
     }
     else{
       displayIcon = 'ios-mail'
-			onIconPress = () => {
-				Linking.openURL(`mailto:${email}?subject=From Colleague`);
-			}
+      onIconPress = () => {
+        Linking.openURL(`mailto:${email}?subject=From Colleague`);
+      }
     }
     return (
 
@@ -152,9 +152,11 @@ export default class PersonScreen extends Component {
   }
   };
 
+
+
   render() {
-  	const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
-  	const { selectedIndex } = this.state
+    const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
+    const { selectedIndex } = this.state
     const dict = {
       0: 'all',
       1: 'classroom',
@@ -167,41 +169,41 @@ export default class PersonScreen extends Component {
 
     return (
       <View style={styles.container}>
-				<View styles={styles.personInformationContainer}>
+        <View styles={styles.personInformationContainer}>
           <View style={styles.pictureView}>
-          		<View style={styles.rowItem}>
-	          	    <Avatar rounded size='large' source={{
-	    				uri: profile_image_uri
-	    			}}/>
-	    		</View>
-    			<View style={styles.rowItem}>
-	          	    <View style={styles.personDetails}>
-		          	    <Text style={styles.name}>{name}</Text>
-		              	<Text style={styles.profileDescription}>{academic_title} of {department}</Text>
-		              	<Text style={styles.profileDescription}>{institution}</Text>
+              <View style={styles.rowItem}>
+                  <Avatar rounded size='large' source={{
+              uri: profile_image_uri
+            }}/>
+          </View>
+          <View style={styles.rowItem}>
+                  <View style={styles.personDetails}>
+                    <Text style={styles.name}>{name}</Text>
+                    <Text style={styles.profileDescription}>{academic_title} of {department}</Text>
+                    <Text style={styles.profileDescription}>{institution}</Text>
                     <Text style={styles.profileDescription}>Experienced in: {experienceStr}</Text>
 
-		            </View>
-		        </View>
-		        <View style={styles.rowItem}>
+                </View>
+            </View>
+            <View style={styles.rowItem}>
               {this.getIcon()}
-	            </View>
+              </View>
           </View>
-				</View>
+        </View>
         <ButtonGroup
-		      onPress={this.updateIndex}
-		      selectedIndex={selectedIndex}
-		      buttons={buttons}
-		      containerStyle={styles.buttonContainer}
+          onPress={this.updateIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={styles.buttonContainer}
           buttonStyle={styles.buttons}
           selectedTextStyle={styles.selectedText}
           selectedButtonStyle={styles.selectedButton}
           innerBorderStyle={{color: 'white'}}
           textStyle={{fontSize: 12, fontWeight: '700'}}
-		  	/>
-			  <ScrollView style={styles.scrollViewContainer}>
-	      	{results}
-	      </ScrollView>
+        />
+        <ScrollView style={styles.scrollViewContainer}>
+          {results}
+        </ScrollView>
         <View style={styles.addButton}>
           {this.getAddButton()}
         </View>
@@ -218,38 +220,38 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pictureView: {
-  	marginLeft: 20,
-  	marginRight: 20,
-  	flexDirection: 'row',
-  	justifyContent: 'space-around',
-  	alignItems: 'center'
+    marginLeft: 20,
+    marginRight: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   personDetails: {
     flexDirection: 'column',
-  	marginLeft: 10,
-  	marginRight: 10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   rowItem: {
     marginTop: 15,
-		marginBottom: 15,
+    marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   feed: {
-  	alignItems: 'center',
+    alignItems: 'center',
   },
   rectangle1: {
-  	height: 130,
-  	width: 380,
-  	backgroundColor: 'red',
-  	margin: 10
+    height: 130,
+    width: 380,
+    backgroundColor: 'red',
+    margin: 10
   },
   rectangle2: {
-  	height: 130,
-  	width: 380,
-  	backgroundColor: 'blue',
-  	margin: 10
+    height: 130,
+    width: 380,
+    backgroundColor: 'blue',
+    margin: 10
   },
   name:{
     fontSize:22,
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
   },
   profileDescription:{
     fontSize:16,
-		color: Colors.lightGray
+    color: Colors.lightGray
   },
   buttons:{
     borderBottomColor: Colors.mainThemeColor,
@@ -277,8 +279,8 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     paddingHorizontal: 20
   },
-	personInformationContainer: {
-	},
+  personInformationContainer: {
+  },
   addButton: {
     alignSelf:'center',
     position: 'absolute',

@@ -1,7 +1,24 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
+import { Ionicons  } from '@expo/vector-icons'
 
 import Colors from '../constants/Colors';
+
+function getBookmark (saved){
+    console.log(saved)
+    if(saved){
+      displayIcon = 'ios-bookmark'
+    }else{
+      displayIcon = 'ios-bookmark-outline'
+    }
+    return (
+
+    <TouchableOpacity
+      onPress={() => {}}>
+        <Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
+    </TouchableOpacity>
+    )
+  };
 
 export function ArticleThumbnail(props) {
   return (
@@ -26,6 +43,9 @@ export function ArticleThumbnail(props) {
         <View styles={styles.thumbnailTextRow}>
           <Text style={styles.thumbnailBodyTextStyle}>Tailored for accessibility needs: {props.fields.accessibility_type.join()}</Text>
         </View>
+      </View>
+      <View styles={styles.saveContainer}>
+        {getBookmark(props.fields.saved)}
       </View>
     </TouchableOpacity>
   );
@@ -54,6 +74,9 @@ export function ClassResourceThumbnail(props) {
         <View styles={styles.thumbnailTextRow}>
           <Text style={styles.thumbnailBodyTextStyle}>Tailored for accessibility needs: {props.fields.accessibility_type.join()}</Text>
         </View>
+      </View>
+      <View styles={styles.saveContainer}>
+        {getBookmark(props.fields.saved)}
       </View>
     </TouchableOpacity>
   );
@@ -115,6 +138,9 @@ export function TalkThumbnail(props) {
           <Text style={styles.thumbnailBodyTextStyle}>Tailored for accessibility needs: {props.fields.accessibility_type.join()}</Text>
         </View>
       </View>
+      <View styles={styles.saveContainer}>
+        {getBookmark(props.fields.saved)}
+      </View>
     </TouchableOpacity>
   );
 }
@@ -129,11 +155,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     flexDirection: 'row'
   },
+  saveContainer: {
+    flex: 0.25,
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center'
+  },
   thumbnailImageOuterContainer: {
     flex: 0.25,
     margin: 10,
     marginHorizontal: 15,
-    alignItems: 'center'
+    alignSelf: 'center'
   },
   thumbnailImageInnerContainer: {
     width: 100,

@@ -4,6 +4,7 @@ mockClassResources = [
     accessibility_type: ['Vision'],
     subjects: ['CS'],
     creator_uuid: '0001',
-    title: 'Accessible Karel Assignment'
+    title: 'Accessible Karel Assignment',
+    saved: false
   }
 ]

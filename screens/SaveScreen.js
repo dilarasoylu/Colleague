@@ -1,198 +1,157 @@
-import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { Component} from 'react';
+import { View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
+import {ButtonGroup, Button, Avatar} from 'react-native-elements'
+import { Ionicons  } from '@expo/vector-icons'
+import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnail } from '../components/Thumbnails';
+import talks from '../data/mockTalks';
+import class_resources from '../data/mockClassResources';
+import articles from '../data/mockArticles';
+import Colors from '../constants/Colors';
+import Images from '../constants/Images';
 
-import { MonoText } from '../components/StyledText';
+export default class HomeScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedIndex: 0,
+    }
+ 
+    this.updateIndex = this.updateIndex.bind(this)
+  };
 
-export default function SaveScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
+  };
 
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+  getSavedResources = (array) => {
+    mySaved = []
+    for (let i in array){
+      console.log(array[i].saved)
+      if (array[i].saved){
+        mySaved.push(array[i])
+      }
+    }
+    return mySaved
+  };
 
-          <View
-            style={[styles.codeHighlightContainer, styles.saveScreenFilename]}>
-            <MonoText>screens/SaveScreen.js</MonoText>
-          </View>
+  thumbnailMatching = {
+    Classroom: ClassResourceThumbnail,
+    Article: ArticleThumbnail,
+    Talk: TalkThumbnail,
+    People: PeopleThumbnail
+  }
 
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
+  getResults = (tab, navigation) => {
+      if (tab == 0){
+        mySaved = this.getSavedResources(class_resources)
+        mySaved = mySaved.concat(this.getSavedResources(talks))
+        mySaved= mySaved.concat(this.getSavedResources(articles))
+      } else if (tab == 1){
+        mySaved = this.getSavedResources(class_resources)
+      } else if (tab == 2){
+        mySaved = this.getSavedResources(articles)
+      } else if (tab == 3){
+        mySaved = this.getSavedResources(talks)
+      }
+      return(
+        <View>
+        {
+          mySaved.map((mockItem) => {
+            ThumbnailClass = thumbnailMatching[mockItem['resource_type']]
+            return (
+              <ThumbnailClass
+                navigation={navigation}
+                fields={mockItem}/>
+            );
+          })
+        }
       </View>
-    </View>
-  );
-}
+      )
+    };
 
-SaveScreen.navigationOptions = {
-  header: null,
-};
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
+  render() {
+    const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
 
+    const { selectedIndex } = this.state
+    results = this.getResults(this.state.selectedIndex, this.props.navigation)
     return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
+      <View style={styles.container}>
+        <View style = {styles.topView}>
+          <View style = {styles.rowItem}>
+            <Image style={styles.logo} source={Images.red}/>
+          </View>
+          <View style = {styles.rowItem}>
+            <Text style={styles.title}>My Saved</Text>
+          </View>
+        </View>
+        <ButtonGroup
+          onPress={this.updateIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={styles.buttonContainer}
+          buttonStyle={styles.buttons}
+          selectedTextStyle={styles.selectedText}
+          selectedButtonStyle={styles.selectedButton}
+          innerBorderStyle={{color: 'white'}}
+          textStyle={{fontSize: 12, fontWeight: '700'}}
+        />
+
+        <ScrollView style={styles.scrollViewContainer}>
+          {results}
+        </ScrollView>
+      </View>
     );
   }
 }
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  containter: {
+    flex: 1
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+  topView: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
-  contentContainer: {
-    paddingTop: 30,
+  scrollViewContainer: {
+    paddingHorizontal: 20
   },
-  welcomeContainer: {
-    alignItems: 'center',
+  rowItem: {
     marginTop: 10,
-    marginBottom: 20,
+    marginRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  logo: {
+    width: 60,
+    height: 60,
+    marginBottom:10,
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+  title: {
+    fontSize: 30,
+    color: Colors.mainThemeColor,
+    fontWeight: '700',
   },
-  saveScreenFilename: {
-    marginVertical: 7,
+  buttons:{
+    borderBottomColor: Colors.mainThemeColor,
   },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+  selectedButton:{
+    backgroundColor: Colors.mainThemeColor,
   },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
+  selectedText:{
+    color: 'white',
   },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
+  buttonContainer: {
+    borderColor: 'white',
+    height: 40,
+    paddingHorizontal: 10,
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  scrollViewContainer: {
+    paddingHorizontal: 20
   },
 });
+

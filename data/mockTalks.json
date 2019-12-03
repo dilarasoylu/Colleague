@@ -4,6 +4,7 @@ talks = [
     accessibility_type: ['Attention'],
     subjects: ['CS'],
     creator_uuid: '0001',
-    title: 'Making Course Websites Accessible'
+    title: 'Making Course Websites Accessible',
+    saved: false
   }
 ]

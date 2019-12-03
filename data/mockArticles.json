@@ -4,6 +4,7 @@ mockArticles = [
     accessibility_type: ['Hearing'],
     subjects: ['CS'],
     creator_uuid: '0001',
-    title: 'Accessibility in Physics'
+    title: 'Accessibility in Physics',
+    saved: true
   }
 ]

@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity, TextInput, Switch} from 'react-native';
+import { Alert, View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity, TextInput, Switch} from 'react-native';
 import {ButtonGroup, Button, Avatar, CheckBox} from 'react-native-elements'
 import { Ionicons  } from '@expo/vector-icons'
 import { Linking } from 'react-native'
@@ -44,10 +44,33 @@ export default class UploadScreen extends Component {
     )
   };
 
+  showAlert = () =>{
+      Alert.alert(
+        'Upload Complete!',
+        'View all your uploads in your profile.',
+        [
+          {
+            text: 'Okay',
+            onPress: () => {
+              goBack()
+            },
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+      );
+    
+  }
+
+
   getSubmitButton = () =>{
+    const {goBack} = this.props.navigation;
+        // onPress={() => {goBack()}}>
+
     return(
     <TouchableOpacity style={styles.submitButton}
-      onPress={() => {}}>
+    onPress={this.showAlert}>
+
       <Text style={styles.attachText}>Submit</Text>
     </TouchableOpacity>
     )
@@ -136,34 +159,36 @@ export default class UploadScreen extends Component {
           <Text style={styles.title}>Upload a Class Resource</Text>
         </View>
      </View>
-     <View style={styles.entry}>
-       <Text style={styles.entryTitle}>Title</Text>
-        <TextInput style={styles.inputBox}/>
-     </View>
-      <View style={styles.entry}>
-        <Text style={styles.entryTitle}>Description</Text>
-        <TextInput style={styles.inputBoxBig}
-          multiline={true}
-        />
-     </View> 
-     <View style={styles.entry}>
-      <Text style={styles.entryTitle}>Subject</Text>
-      <TextInput style={styles.inputBox}/>
-    </View>
-     <View style={styles.entry}>
-      <Text style={styles.entryTitle}>Resource Type: </Text>
-      {this.getCheckBoxes('contentTypes', contentTypes, true)}
+     <ScrollView style = {{marginBottom: 45,}}>
+       <View style={styles.entry}>
+         <Text style={styles.entryTitle}>Title</Text>
+          <TextInput style={styles.inputBox}/>
+       </View>
+        <View style={styles.entry}>
+          <Text style={styles.entryTitle}>Description</Text>
+          <TextInput style={styles.inputBoxBig}
+            multiline={true}
+          />
+         </View> 
+         <View style={styles.entry}>
+          <Text style={styles.entryTitle}>Subject</Text>
+          <TextInput style={styles.inputBox}/>
+        </View>
+         <View style={styles.entry}>
+          <Text style={styles.entryTitle}>Resource Type: </Text>
+          {this.getCheckBoxes('contentTypes', contentTypes, true)}
 
-     </View>
-     <View style={styles.entry}>
-      <Text style={styles.entryTitle}>Accessibility Needs: </Text>
-      {this.getCheckBoxes('accessibilityTypes', accessibilityTypes, false)}
-     </View>
-     {this.getAttachButton()}
-     <View style = {{alignSelf: 'center'}}>
-      {this.getSubmitButton()}
-    </View>
-    </View>
+         </View>
+         <View style={styles.entry}>
+          <Text style={styles.entryTitle}>Accessibility Needs: </Text>
+          {this.getCheckBoxes('accessibilityTypes', accessibilityTypes, false)}
+         </View>
+         {this.getAttachButton()}
+         <View style = {{alignSelf: 'center'}}>
+          {this.getSubmitButton()}
+        </View>
+      </ScrollView>
+      </View>
     );
   }
 }
