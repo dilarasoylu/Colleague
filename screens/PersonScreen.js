@@ -1,4 +1,4 @@
-import React, { Component} froxm 'react';
+import React, { Component} from 'react';
 import {Alert, View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import {ButtonGroup, Button, Avatar} from 'react-native-elements'
 import { Ionicons  } from '@expo/vector-icons'
