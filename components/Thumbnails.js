@@ -54,6 +54,7 @@ export function ArticleThumbnail(props) {
 export function ClassResourceThumbnail(props) {
   return (
     <TouchableOpacity
+      onPress={() => {props.navigation.navigate('Assignment', props.fields)}}
       style={styles.thumbnailContainer}>
       <View style={styles.thumbnailImageOuterContainer}>
         <Image

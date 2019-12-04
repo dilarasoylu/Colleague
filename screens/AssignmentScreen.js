@@ -1,0 +1,117 @@
+import React, { Component } from 'react';
+import { View, Text, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+import Colors from '../constants/Colors';
+import mockPeople from '../data/mockPeople';
+
+export default class AssignmentScreen extends Component {
+  render() {
+    fields = {
+      resource_type: this.props.navigation.getParam('resource_type'),
+      accessibility_type: this.props.navigation.getParam('accessibility_type'),
+      subjects: this.props.navigation.getParam('subjects'),
+      creator_uuid: this.props.navigation.getParam('creator_uuid'),
+      title: this.props.navigation.getParam('title'),
+      uri: this.props.navigation.getParam('uri'),
+      description: this.props.navigation.getParam('description')
+    }
+
+    creator = getCreatorFields(fields.creator_uuid)
+    accessibilityRow = getFieldRow('Tailored for Accessibility Needs:', fields.accessibility_type)
+    subjectRow = getFieldRow('Relevant for Subjects:', fields.subjects)
+
+    return (
+      <View style={styles.mainContainer}>
+        <ScrollView>
+          <View style={styles.informationContainer}>
+            <View style={styles.container}>
+              <Text style={styles.titleText}>{fields.title}</Text>
+              <View style={styles.row}>
+                <Text style={styles.titleCreator}>Created by </Text>
+                <Text style={styles.titleCreatorColored}>Dr. {creator.name}</Text>
+              </View>
+              {accessibilityRow}
+              {subjectRow}
+              <Text style={styles.fieldHeader}>Description:</Text>
+              <Text style={styles.fieldItem}>{fields.description}</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
+
+function getCreatorFields(uuid) {
+  for (person in mockPeople) {
+    if (mockPeople[person].uuid == uuid) {
+      return mockPeople[person]
+    }
+  }
+}
+
+function getFieldRow(fieldName, fieldItems) {
+  return (
+    <View style={styles.row}>
+      <Text style={styles.fieldHeader}>{fieldName}</Text>
+      {
+        fieldItems.map(item => {
+          return (
+            <Text style={styles.fieldItem}>{item}</Text>
+          )
+        })
+      }
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: Colors.backgroundColor,
+  },
+  informationContainer: {
+    backgroundColor: Colors.backgroundColor,
+    shadowOffset: {height: 0, width: 0},
+    shadowColor: Colors.shadowColor,
+    shadowOpacity: 1,
+    shadowRadius: 3,
+    paddingBottom: 16
+  },
+  container: {
+    paddingHorizontal: 20
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  titleText: {
+    fontSize: 24,
+    fontWeight: '500',
+    color: Colors.mainThemeColor,
+    paddingTop: 12
+  },
+  titleCreator: {
+    fontSize: 18,
+    color: Colors.lightGray,
+    paddingTop: 8,
+    paddingBottom: 4
+  },
+  titleCreatorColored: {
+    fontSize: 18,
+    color: Colors.mainThemeColor,
+    paddingTop: 8,
+    paddingBottom: 4
+  },
+  fieldHeader: {
+    fontSize: 16,
+    color: Colors.mainThemeColor,
+    paddingTop: 8
+  },
+  fieldItem: {
+    fontSize: 16,
+    color: Colors.lightGray,
+    paddingTop: 8,
+    paddingHorizontal: 8
+  },
+});

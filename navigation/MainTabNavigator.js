@@ -9,6 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import SaveScreen from '../screens/SaveScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import AssignmentScreen from '../screens/AssignmentScreen';
 import PersonScreen from '../screens/PersonScreen';
 import UploadScreen from '../screens/UploadScreen';
 
@@ -43,6 +44,7 @@ const SearchStack = createStackNavigator(
   {
     Search: SearchScreen,
     People: PersonScreen,
+    Assignment: AssignmentScreen
   },
   config
 );
