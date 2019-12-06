@@ -1,8 +1,5 @@
 import React, { Component} from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
-import {ButtonGroup, Button, Avatar} from 'react-native-elements'
-import { Ionicons  } from '@expo/vector-icons'
-import { PeopleThumbnail } from '../components/Thumbnails';
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 import Colors from '../constants/Colors';
 import Images from '../constants/Images';
@@ -11,53 +8,119 @@ export default class HomeScreen extends Component {
 
   render() {
 
+    browseSection = getBrowseSection()
+
     return (
       <View style={styles.container}>
-        <View style = {styles.topView}>
-          <View style = {styles.rowItem}>
-            <Image style={styles.logo} source={Images.logoBlue}/>
-          </View>
-          <View style = {styles.rowItem}>
-            <Text style={styles.title}>Colleague</Text>
-          </View>
+
+        <View style={[styles.row, {paddingHorizontal: 20}]}>
+          <Image style={styles.logo} source={Images.logoBlue}/>
+          <Text style={styles.title}>Colleague</Text>
         </View>
 
-        <ScrollView style={styles.scrollViewContainer}>
-          <Text>Content</Text>
+        <ScrollView style={{paddingHorizontal: 20}}>
+
+          <View style={styles.tipOfTheDay}>
+          </View>
+
+          {browseSection}
+
         </ScrollView>
+
       </View>
     );
   }
 }
 
+function getBrowseCategory(name, color, isLeft) {
+
+  margin = 8
+  if (isLeft) {
+    customStyle = {marginRight: margin}
+  } else {
+    customStyle = {marginLeft: margin}
+  }
+
+  customStyle['backgroundColor'] = color
+
+  return (
+    <TouchableOpacity style={[styles.browseCategory, customStyle]}>
+      <Text style={styles.browseCategoryText}>{name}</Text>
+    </TouchableOpacity>
+  )
+}
+
+function getBrowseSection() {
+  categoryRows = [
+    [
+      getBrowseCategory('Computer Science', 'goldenrod', true),
+      getBrowseCategory('Mathematics', 'darkorange', false)
+    ],
+    [
+      getBrowseCategory('Arts', 'salmon', true),
+      getBrowseCategory('English', 'tomato', false)
+    ],
+    [
+      getBrowseCategory('Physics', 'plum', true),
+      getBrowseCategory('Chemistry', 'mediumpurple', false)
+    ],
+    [
+      getBrowseCategory('Biology', 'darkolivegreen', true),
+      getBrowseCategory('Statistics', 'darkseagreen', false)
+    ],
+  ]
+
+  return (
+    categoryRows.map(row => {
+      return (
+        <View style={styles.row}>
+          {
+            row.map(item => {
+              return (item)
+            })
+          }
+        </View>
+      )
+    })
+  )
+}
+
 const styles = StyleSheet.create({
-  containter: {
-    flex: 1
+  container: {
+    flex: 1,
+    paddingVertical: 8
   },
-  topView: {
-    paddingHorizontal: 20,
+  row: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  scrollViewContainer: {
-    paddingHorizontal: 20
-  },
-  rowItem: {
-    marginTop: 10,
-    marginRight: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
+    paddingVertical: 8
   },
   logo: {
-    width: 60,
-    height: 60,
-    marginBottom:10,
+    width: 50,
+    height: 50
   },
   title: {
-    fontSize: 30,
+    fontSize: 45,
     color: Colors.mainThemeColor,
-    fontWeight: '700',
+    fontWeight: '500',
+    paddingHorizontal: 10
+  },
+  tipOfTheDay: {
+    height: 200,
+    backgroundColor: Colors.mainThemeColor,
+    marginBottom: 10
+  },
+  browseCategory: {
+    flexDirection: 'row',
+    flex: 0.5,
+    height: 100,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  browseCategoryText: {
+    color: 'white',
+    fontWeight: '500',
+    fontSize: 22,
+    textAlign: 'center'
   }
 });
