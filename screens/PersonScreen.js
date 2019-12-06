@@ -110,7 +110,7 @@ export default class PersonScreen extends Component {
     displayIcon = 'ios-add-circle'
     console.log("add button navigation")
     console.log(this.props.navigation)
-    if (this.state.selectedIndex==0){ // && !this.props.navigation){
+    if (this.state.selectedIndex==0 && uuid==loggedUserUuid){ 
 
     return (
     <TouchableOpacity
