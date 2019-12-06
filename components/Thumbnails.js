@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
-import { Ionicons  } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 
@@ -8,14 +8,16 @@ function getBookmark (saved){
     console.log(saved)
     if(saved){
       displayIcon = 'ios-bookmark'
+      savedColor = Colors.mainThemeColor
     }else{
-      displayIcon = 'ios-bookmark-outline'
+      displayIcon = 'ios-bookmark'
+      savedColor = Colors.lightGray
     }
     return (
 
     <TouchableOpacity
       onPress={() => {}}>
-        <Ionicons name={displayIcon} size={32} color={Colors.mainThemeColor} />
+        <Ionicons name = {displayIcon} size = {32} color={savedColor}/>
     </TouchableOpacity>
     )
   };
@@ -45,7 +47,6 @@ export function ArticleThumbnail(props) {
         </View>
       </View>
       <View styles={styles.saveContainer}>
-        {getBookmark(props.fields.saved)}
       </View>
     </TouchableOpacity>
   );
@@ -77,7 +78,6 @@ export function ClassResourceThumbnail(props) {
         </View>
       </View>
       <View styles={styles.saveContainer}>
-        {getBookmark(props.fields.saved)}
       </View>
     </TouchableOpacity>
   );
@@ -140,7 +140,6 @@ export function TalkThumbnail(props) {
         </View>
       </View>
       <View styles={styles.saveContainer}>
-        {getBookmark(props.fields.saved)}
       </View>
     </TouchableOpacity>
   );
@@ -157,8 +156,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   saveContainer: {
-    flex: 0.25,
-    marginHorizontal: 10,
+    flex: 0.10,
+    marginHorizontal: 5,
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center'

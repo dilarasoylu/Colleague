@@ -57,7 +57,7 @@ export default class PersonScreen extends Component {
   getResourcesbyUUID = (array, uuid) => {
     myUploads = []
     for (let i in array){
-      if (array[i].creator_uuid == loggedUserUuid){
+      if (array[i].creator_uuid == uuid){
         myUploads.push(array[i])
       }
     }
@@ -164,7 +164,7 @@ export default class PersonScreen extends Component {
       3: 'talks',
     }
 
-    results = this.getResults(this.state.selectedIndex, loggedUserUuid, this.props.navigation)
+    results = this.getResults(this.state.selectedIndex, uuid, this.props.navigation)
     experienceStr = this.getExperienceTypes(accessibility_type)
 
     return (
@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
     fontSize:22,
     color: Colors.mainThemeColor,
     fontWeight: '600',
+    paddingVertical: 5
   },
   profileDescription:{
     fontSize:16,

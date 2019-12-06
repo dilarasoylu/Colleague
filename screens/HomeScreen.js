@@ -15,7 +15,7 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <View style = {styles.topView}>
           <View style = {styles.rowItem}>
-            <Image style={styles.logo} source={Images.red}/>
+            <Image style={styles.logo} source={Images.logoBlue}/>
           </View>
           <View style = {styles.rowItem}>
             <Text style={styles.title}>Colleague</Text>

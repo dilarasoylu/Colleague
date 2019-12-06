@@ -80,9 +80,6 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <View style = {styles.topView}>
           <View style = {styles.rowItem}>
-            <Image style={styles.logo} source={Images.red}/>
-          </View>
-          <View style = {styles.rowItem}>
             <Text style={styles.title}>My Saved</Text>
           </View>
         </View>
@@ -114,7 +111,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 60,
   },
   scrollViewContainer: {
     paddingHorizontal: 20

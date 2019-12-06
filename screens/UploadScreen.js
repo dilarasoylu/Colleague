@@ -52,7 +52,7 @@ export default class UploadScreen extends Component {
           {
             text: 'Okay',
             onPress: () => {
-              goBack()
+              
             },
             style: 'cancel',
           },
