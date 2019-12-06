@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
   thumbnailTextContainer: {
     flex: 0.65,
     margin: 10,
+    marginLeft: 25,
     flexDirection: 'column'
   },
   thumbnailTitleStyle: {
