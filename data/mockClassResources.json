@@ -5,7 +5,7 @@ mockClassResources = [
     subjects: ['CS'],
     creator_uuid: '0001',
     title: 'Accessible Karel Assignment',
-    uri: '../assets/documents/karel_the_robot.pdf',
+    uri: '../assets/images/assignment_image_karel.jpg',
     description: 'Version of the Karel Assignment that is modified to be accessible for blind students.'
   },
   {
@@ -18,4 +18,3 @@ mockClassResources = [
     description: 'This UI design assignment is modified from its original version in order to be more accessible for students with attention deficits.'
   }
 ]
-

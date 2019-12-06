@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Button, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
@@ -36,6 +36,12 @@ export default class AssignmentScreen extends Component {
               <Text style={styles.fieldHeader}>Description:</Text>
               <Text style={styles.fieldItem}>{fields.description}</Text>
             </View>
+          </View>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.imageStyle}
+              source={require('../assets/images/assignment_image_karel.jpg')}
+            />
           </View>
         </ScrollView>
       </View>
@@ -114,4 +120,16 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingHorizontal: 8
   },
+  imageContainer: {
+    flex: 1,
+    height: 500,
+    paddingHorizontal: 20,
+    paddingVertical: 20
+  },
+  imageStyle: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain'
+  }
 });
