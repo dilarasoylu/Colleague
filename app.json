@@ -21,6 +21,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "owner": "colleague147"
   }
 }
