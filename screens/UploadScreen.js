@@ -69,7 +69,8 @@ export default class UploadScreen extends Component {
 
     return(
     <TouchableOpacity style={styles.submitButton}
-    onPress={this.showAlert}>
+    onPress={() => {this.props.navigation.navigate('Confirmation')}}>
+
 
       <Text style={styles.attachText}>Submit</Text>
     </TouchableOpacity>

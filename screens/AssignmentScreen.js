@@ -5,6 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import images from '../constants/Images'
 import mockPeople from '../data/mockPeople';
+import Toast from 'react-native-tiny-toast'
+
 
 export default class AssignmentScreen extends Component {
   render() {

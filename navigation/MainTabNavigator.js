@@ -12,6 +12,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import AssignmentScreen from '../screens/AssignmentScreen';
 import PersonScreen from '../screens/PersonScreen';
 import UploadScreen from '../screens/UploadScreen';
+import ConfirmationScreen from '../screens/ConfirmationScreen';
 
 
 const config = Platform.select({
@@ -80,6 +81,7 @@ const ProfileStack = createStackNavigator(
     People: PersonScreen,
     Assignment: AssignmentScreen,
     Upload: UploadScreen,
+    Confirmation: ConfirmationScreen,
   },
   config
 );
