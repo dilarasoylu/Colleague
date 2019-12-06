@@ -16,38 +16,10 @@ import { ArticleThumbnail, ClassResourceThumbnail, PeopleThumbnail, TalkThumbnai
 
 
 export default class PersonScreen extends Component {
-  constructor(props) {
-    super(props)
-    if(this.props.fields){
-      console.log(this.props.fields)
-      accessibility_type = this.props.fields.accessibility_type
-      subjects = this.props.fields.subjects
-      uuid = this.props.fields.uuid
-      name = this.props.fields.name
-      email = this.props.fields.email
-      institution = this.props.fields.institution
-      academic_title = this.props.fields.academic_title
-      department= this.props.fields.department
-      profile_image_uri = this.props.fields.profile_image_uri
-    }else{
-      console.log("navigation: ")
-      console.log(this.props.navigation)
-      accessibility_type = this.props.navigation.getParam('accessibility_type')
-      subjects = this.props.navigation.getParam('subjects')
-      uuid = this.props.navigation.getParam('uuid')
-      name = this.props.navigation.getParam('name')
-      email = this.props.navigation.getParam('email')
-      institution = this.props.navigation.getParam('institution')
-      academic_title = this.props.navigation.getParam('academic_title')
-      department= this.props.navigation.getParam('department')
-      profile_image_uri = this.props.navigation.getParam('profile_image_uri')
-    } 
-    this.state = {
-      selectedIndex: 0,
-    }
- 
-    this.updateIndex = this.updateIndex.bind(this)
-  };
+
+  state = {
+    selectedIndex: 0,
+  }
 
   updateIndex (selectedIndex) {
     this.setState({selectedIndex})
@@ -69,7 +41,7 @@ export default class PersonScreen extends Component {
     str = ""
     if (accessibility_type.length ==2){
       return str.concat(accessibility_type[0]," & ", accessibility_type[1])
-    } 
+    }
     for (i=0; i<accessibility_type.length-1; i++){
       console.log(str)
       str = str.concat(accessibility_type[i], ', ')
@@ -152,9 +124,34 @@ export default class PersonScreen extends Component {
   }
   };
 
-
-
   render() {
+
+    if(this.props.fields){
+      console.log("fields")
+      accessibility_type = this.props.fields.accessibility_type
+      subjects = this.props.fields.subjects
+      uuid = this.props.fields.uuid
+      name = this.props.fields.name
+      email = this.props.fields.email
+      institution = this.props.fields.institution
+      academic_title = this.props.fields.academic_title
+      department= this.props.fields.department
+      profile_image_uri = this.props.fields.profile_image_uri
+    }else{
+      console.log("navigation")
+      accessibility_type = this.props.navigation.getParam('accessibility_type')
+      subjects = this.props.navigation.getParam('subjects')
+      uuid = this.props.navigation.getParam('uuid')
+      name = this.props.navigation.getParam('name')
+      email = this.props.navigation.getParam('email')
+      institution = this.props.navigation.getParam('institution')
+      academic_title = this.props.navigation.getParam('academic_title')
+      department= this.props.navigation.getParam('department')
+      profile_image_uri = this.props.navigation.getParam('profile_image_uri')
+    }
+
+    this.updateIndex = this.updateIndex.bind(this)
+
     const buttons = ['ALL', 'CLASSROOM', 'ARTICLES', 'TALKS']
     const { selectedIndex } = this.state
     const dict = {

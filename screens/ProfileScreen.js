@@ -13,12 +13,15 @@ import loggedUserUuid  from '../data/loginData'
 import people from '../data/mockPeople'
 
 
-export default function ProfileScreen (props){
+export default class ProfileScreen extends Component {
 
-    return ( 
-        <PersonScreen fields={people[0]}/>
-    );
-   	
+    render () {
+      return (
+          <PersonScreen
+            fields={people[0]}
+            navigation={this.props.navigation}
+          />
+      );
+    }
+
 }
-
-

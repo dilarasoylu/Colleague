@@ -78,6 +78,7 @@ const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
     People: PersonScreen,
+    Assignment: AssignmentScreen,
     Upload: UploadScreen,
   },
   config
