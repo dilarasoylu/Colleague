@@ -5,6 +5,7 @@ export default {
   backgroundColor: '#fff',
   whiteComponentColor: '#F8F8FA',
   lightGray: 'rgba(0,0,0,0.4)',
+  darkGray: 'rgba(0,0,0,0.7)',
   shadowColor: '#ddd',
   tabIconDefault: '#ccc',
   tabIconSelected: mainThemeColor,
