@@ -3,6 +3,7 @@ import { View, Text, Image, Button, ScrollView, StyleSheet, TouchableOpacity } f
 import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
+import images from '../constants/Images'
 import mockPeople from '../data/mockPeople';
 
 export default class AssignmentScreen extends Component {
@@ -13,13 +14,17 @@ export default class AssignmentScreen extends Component {
       subjects: this.props.navigation.getParam('subjects'),
       creator_uuid: this.props.navigation.getParam('creator_uuid'),
       title: this.props.navigation.getParam('title'),
-      uri: this.props.navigation.getParam('uri'),
+      image_name: this.props.navigation.getParam('image_name'),
       description: this.props.navigation.getParam('description')
     }
 
     creator = getCreatorFields(fields.creator_uuid)
     accessibilityRow = getFieldRow('Tailored for Accessibility Needs:', fields.accessibility_type)
     subjectRow = getFieldRow('Relevant for Subjects:', fields.subjects)
+    image = images[fields.image_name]
+    console.log(images)
+    console.log(fields.image_name)
+    console.log(image)
 
     return (
       <View style={styles.mainContainer}>
@@ -40,7 +45,7 @@ export default class AssignmentScreen extends Component {
           <View style={styles.imageContainer}>
             <Image
               style={styles.imageStyle}
-              source={require('../assets/images/assignment_image_karel.jpg')}
+              source={image}
             />
           </View>
         </ScrollView>
