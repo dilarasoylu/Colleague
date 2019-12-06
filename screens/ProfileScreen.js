@@ -17,10 +17,10 @@ export default class ProfileScreen extends Component {
 
     render () {
       return (
-          <PersonScreen
-            fields={people[0]}
-            navigation={this.props.navigation}
-          />
+        <PersonScreen
+          fields={people[0]}
+          navigation={this.props.navigation}
+        />
       );
     }
 

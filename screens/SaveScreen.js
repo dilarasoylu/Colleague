@@ -9,13 +9,13 @@ import articles from '../data/mockArticles';
 import Colors from '../constants/Colors';
 import Images from '../constants/Images';
 
-export default class HomeScreen extends Component {
+export default class SaveScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
       selectedIndex: 0,
     }
- 
+
     this.updateIndex = this.updateIndex.bind(this)
   };
 
@@ -103,9 +103,14 @@ export default class HomeScreen extends Component {
   }
 }
 
+SaveScreen.navigationOptions = {
+  header: null,
+};
+
 const styles = StyleSheet.create({
-  containter: {
-    flex: 1
+  container: {
+    flex: 1,
+    paddingTop: 30
   },
   topView: {
     paddingHorizontal: 20,
@@ -152,4 +157,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
 });
-

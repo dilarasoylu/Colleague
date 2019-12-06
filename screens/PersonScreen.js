@@ -209,12 +209,10 @@ export default class PersonScreen extends Component {
   }
 }
 
-
-
 const styles = StyleSheet.create({
   container:{
     flexDirection: 'column',
-    flex: 1,
+    flex: 1
   },
   pictureView: {
     marginLeft: 20,

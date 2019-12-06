@@ -85,9 +85,14 @@ function getBrowseSection() {
   )
 }
 
+HomeScreen.navigationOptions = {
+  header: null,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 30,
     paddingVertical: 8
   },
   row: {
