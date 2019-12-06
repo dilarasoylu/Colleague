@@ -14,10 +14,10 @@ installed already.
 7. In your terminal, navigate to the unzipped folder you downloaded.
 8. Type `npm install` to install the necessary node modules for the project.
 9. Make sure that your computer and phone are on the same Wi-Fi.
-10.Type `expo start` to start `Expo`. A QR code will be printed in the terminal.
+10. Type `expo start` to start `Expo`. A QR code will be printed in the terminal.
 Scan the QR code from your iPhone camera app. Click on the “open in Expo”
 banner at the top of your screen to open the app in `Expo`.
-11.The app should now be opened in `Expo` showing our Home Page.
+11. The app should now be opened in `Expo` showing our Home Page.
 When you run the app, you might get warnings at the bottom of certain pages. You can
 safely ignore them by hitting the ‘Dismiss’ button.
 
